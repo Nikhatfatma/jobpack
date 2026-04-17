@@ -1,0 +1,3768 @@
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0
+  }
+
+  :root {
+    --bg: #EEF2F8;
+    --s1: #FFF;
+    --s2: #F5F8FC;
+    --s3: #EBF0F8;
+    --s4: #DDE5F2;
+    --bd: #D4DCE8;
+    --bd2: #B8C4D8;
+    --bd3: #7A94B8;
+    --org: #E8770C;
+    --org-dk: #C46008;
+    --org-lt: #FEF3E8;
+    --org-md: #F5C490;
+    --teal: #1469A8;
+    --teal-lt: #E6F2FA;
+    --teal-md: #90C4E8;
+    --navy: #1A2845;
+    --navy2: #2E4070;
+    --grn: #1A7840;
+    --grn-lt: #EBF7EF;
+    --grn-bd: #7DC89A;
+    --amb: #8A5608;
+    --amb-lt: #FDF6E8;
+    --amb-bd: #E8C878;
+    --red: #B52020;
+    --red-lt: #FEEFEF;
+    --red-bd: #ECAAA4;
+    /* PRIORITY brand: Adjusting theme for logo visibility (logo is purple/cyan) */
+    --pri: #7C3AED;
+    --pri2: #5B21B6;
+    --pri-cyn: #06B6D4;
+    --pri-lt: #F5F3FF;
+    --pri-md: #C4B5FD;
+    --pri-dk: #4C1D95;
+    --pri-bg: #F8FAFC;
+    /* Light background for Priority sections */
+    --t1: #1A2845;
+    --t2: #4A6080;
+    --t3: #8098B8;
+    --rad: 10px;
+    --rad-sm: 6px
+  }
+
+  .W {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    color: var(--t1);
+    background: var(--bg)
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    font-family: inherit;
+    color: inherit
+  }
+
+  .top {
+    height: 30px;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    position: sticky;
+    top: 0;
+    z-index: 2000
+  }
+
+  .hdr {
+    height: 68px;
+    background: var(--s1);
+    border-bottom: 2px solid var(--bd);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 22px;
+    position: sticky;
+    top: 30px;
+    z-index: 2000;
+    box-shadow: 0 1px 4px rgba(26, 40, 69, .06)
+  }
+
+  .nav {
+    height: 46px;
+    background: var(--s1);
+    border-bottom: 1.5px solid var(--bd);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 22px;
+    position: sticky;
+    top: 98px;
+    z-index: 2000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .05)
+  }
+
+  .steps {
+    height: 44px;
+    background: var(--s1);
+    border-bottom: 1.5px solid var(--bd);
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 0 18px;
+    position: sticky;
+    top: 144px;
+    z-index: 1500
+  }
+
+  /* ── TOP BAR HELPERS ── */
+  .top-inner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    color: rgba(255, 255, 255, .6)
+  }
+
+  .top-hl {
+    color: rgba(255, 255, 255, .9);
+    font-weight: 700
+  }
+
+  .tsep {
+    width: 1px;
+    height: 12px;
+    background: rgba(255, 255, 255, .2)
+  }
+
+  /* ── HEADER HELPERS ── */
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer
+  }
+
+  .logo-a {
+    font-size: 19px;
+    font-style: italic;
+    font-weight: 800;
+    color: var(--navy);
+    letter-spacing: -.4px
+  }
+
+  .logo-br {
+    font-size: 9px;
+    font-weight: 800;
+    color: var(--teal);
+    letter-spacing: .2em
+  }
+
+  .logo-tag {
+    font-size: 9px;
+    color: var(--t3);
+    margin-top: 1px
+  }
+
+  .hdr-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    border: 1px solid
+  }
+
+  .badge-org {
+    background: var(--org-lt);
+    border-color: var(--org-md);
+    color: var(--org-dk)
+  }
+
+  .badge-pri {
+    background: var(--pri-lt);
+    border-color: var(--pri-md);
+    color: var(--pri);
+    cursor: pointer
+  }
+
+  .badge-pri:hover {
+    background: #EDE9FE
+  }
+
+  .av {
+    width: 36px;
+    height: 36px;
+    background: var(--org);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 800;
+    color: white
+  }
+
+  /* ── WORKFLOW STEPS ── */
+  .step {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 0 12px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #9AAFC8;
+    letter-spacing: .03em
+  }
+
+  .step.done {
+    color: var(--grn)
+  }
+
+  .step.active {
+    color: var(--navy)
+  }
+
+  .step-n {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 800;
+    flex-shrink: 0
+  }
+
+  .step.done .step-n {
+    background: var(--grn);
+    border-color: var(--grn);
+    color: white
+  }
+
+  .step.active .step-n {
+    background: var(--org);
+    border-color: var(--org);
+    color: white
+  }
+
+  .step-pri .step-n {
+    background: var(--pri) !important;
+    border-color: var(--pri) !important
+  }
+
+  .sarr {
+    color: #C8D4E8;
+    font-size: 16px;
+    margin: 0 1px;
+    flex-shrink: 0
+  }
+
+  .nb {
+    padding: 6px 13px;
+    font-size: 11px;
+    font-weight: 700;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #7090B0;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    letter-spacing: .03em;
+    transition: all .15s;
+    border-radius: var(--rad-sm) var(--rad-sm) 0 0
+  }
+
+  .nb:hover {
+    color: var(--navy);
+    background: var(--s3)
+  }
+
+  .nb.on {
+    color: var(--org);
+    border-bottom-color: var(--org)
+  }
+
+  .nb.bom-on {
+    color: var(--pri);
+    border-bottom-color: var(--pri)
+  }
+
+  .nsep {
+    flex: 1
+  }
+
+  /* ── SCREENS ── */
+  .scr {
+    display: none;
+    min-height: 100vh
+  }
+
+  .scr.on {
+    display: block
+  }
+
+  .pb {
+    padding: 20px 22px
+  }
+
+  /* ── BUTTONS ── */
+  .btn {
+    padding: 8px 16px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1.5px solid var(--bd2);
+    background: var(--s1);
+    color: var(--t1);
+    border-radius: var(--rad-sm);
+    transition: all .13s;
+    letter-spacing: .03em;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px
+  }
+
+  .btn:hover {
+    background: var(--s3);
+    border-color: var(--bd3)
+  }
+
+  .btn:active {
+    transform: scale(.97)
+  }
+
+  .btn-org {
+    background: var(--org);
+    color: white;
+    border-color: var(--org);
+    border-radius: 22px
+  }
+
+  .btn-org:hover {
+    background: var(--org-dk)
+  }
+
+  .btn-org-o {
+    background: var(--org-lt);
+    color: var(--org-dk);
+    border-color: var(--org-md);
+    border-radius: 22px
+  }
+
+  .btn-pri {
+    background: var(--s1);
+    color: var(--pri);
+    border-color: var(--pri);
+    border-radius: 22px
+  }
+
+  .btn-pri:hover {
+    background: var(--pri-lt)
+  }
+
+  .btn-pri-filled {
+    background: var(--pri);
+    color: white;
+    border-color: var(--pri);
+    border-radius: 22px
+  }
+
+  .btn-pri-filled:hover {
+    background: var(--pri2)
+  }
+
+  .btn-pri-o {
+    background: var(--pri-lt);
+    color: var(--pri);
+    border-color: var(--pri-md);
+    border-radius: 22px
+  }
+
+  .btn-pri-o:hover {
+    background: #EDE9FE
+  }
+
+  .btn-teal {
+    background: var(--teal-lt);
+    color: var(--teal);
+    border-color: var(--teal-md);
+    border-radius: 22px
+  }
+
+  .btn-navy {
+    background: var(--navy);
+    color: white;
+    border-color: var(--navy);
+    border-radius: 22px
+  }
+
+  .btn-red-o {
+    background: var(--red-lt);
+    color: var(--red);
+    border-color: var(--red-bd);
+    border-radius: 22px
+  }
+
+  .sm {
+    padding: 5px 11px;
+    font-size: 10px
+  }
+
+  .xsm {
+    padding: 3px 8px;
+    font-size: 9px
+  }
+
+  /* ── BADGES ── */
+  .bdg {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 9px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .03em;
+    border-radius: var(--rad-sm);
+    border: 1.5px solid
+  }
+
+  .bg {
+    background: var(--grn-lt);
+    color: var(--grn);
+    border-color: var(--grn-bd)
+  }
+
+  .ba {
+    background: var(--amb-lt);
+    color: var(--amb);
+    border-color: var(--amb-bd)
+  }
+
+  .bb {
+    background: var(--teal-lt);
+    color: var(--teal);
+    border-color: var(--teal-md)
+  }
+
+  .br2 {
+    background: var(--red-lt);
+    color: var(--red);
+    border-color: var(--red-bd)
+  }
+
+  .bp {
+    background: var(--pri-lt);
+    color: var(--pri);
+    border-color: var(--pri-md)
+  }
+
+  .bopt {
+    background: #F9FAFB;
+    color: #6B7280;
+    border-color: #D1D5DB;
+    font-style: italic
+  }
+
+  /* ── PRIORITY SVG LOGO ── */
+  .pri-logo-sm {
+    flex-shrink: 0
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--s1);
+    border: 1px solid var(--bd);
+    border-radius: var(--rad);
+    overflow: hidden;
+    transition: border-color .15s, box-shadow .15s
+  }
+
+  .card:hover {
+    border-color: var(--bd2);
+    box-shadow: 0 2px 8px rgba(26, 40, 69, .06)
+  }
+
+  .cb {
+    padding: 16px
+  }
+
+  .sc {
+    background: var(--s1);
+    border: 1px solid var(--bd);
+    border-radius: var(--rad);
+    padding: 16px;
+    border-top: 3px solid var(--org);
+    transition: all .15s
+  }
+
+  .sc:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(26, 40, 69, .07)
+  }
+
+  .sc-v {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--org);
+    line-height: 1;
+    margin-bottom: 4px
+  }
+
+  .sc-l {
+    font-size: 9px;
+    font-weight: 800;
+    color: var(--t3);
+    letter-spacing: .1em
+  }
+
+  .sc-s {
+    font-size: 11px;
+    color: var(--t2);
+    margin-top: 5px
+  }
+
+  .sc-pri {
+    border-top-color: var(--pri)
+  }
+
+  .sc-pri .sc-v {
+    color: var(--pri)
+  }
+
+  .sh {
+    background: var(--org);
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+  }
+
+  .sh-t {
+    font-size: 10px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: .09em
+  }
+
+  .sh-pri {
+    background: var(--navy);
+    border-bottom: 1px solid var(--pri-md)
+  }
+
+  .sh-pri .sh-t {
+    color: white
+  }
+
+  .sh-nv {
+    background: var(--navy)
+  }
+
+  /* ── TABLE ── */
+  .tbl {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px
+  }
+
+  .tbl th {
+    background: var(--s3);
+    padding: 6px 8px;
+    text-align: left;
+    font-size: 9px;
+    font-weight: 800;
+    color: var(--t3);
+    border: 1px solid var(--bd);
+    letter-spacing: .06em
+  }
+
+  .tbl td {
+    padding: 6px 8px;
+    border: 1px solid var(--bd);
+    vertical-align: middle;
+    color: var(--t1)
+  }
+
+  .tbl tr:nth-child(even) td {
+    background: var(--s2)
+  }
+
+  .tbl tr:hover td {
+    background: var(--org-lt);
+    transition: background .1s
+  }
+
+  .tbl .opt td {
+    background: #FAFAFA;
+    color: #888;
+    font-style: italic
+  }
+
+  .tbl .opt:hover td {
+    background: #FEF3E8
+  }
+
+  .pn {
+    font-family: monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--pri);
+    background: var(--pri-lt);
+    padding: 2px 5px;
+    border-radius: 3px;
+    white-space: nowrap
+  }
+
+  .pn-miss {
+    font-family: monospace;
+    font-size: 10px;
+    color: var(--red);
+    background: var(--red-lt);
+    padding: 2px 5px;
+    border-radius: 3px
+  }
+
+  /* ── INFO GRID ── */
+  .ig {
+    border: 1px solid var(--bd);
+    border-radius: var(--rad-sm);
+    overflow: hidden
+  }
+
+  .ig-row {
+    display: grid;
+    grid-template-columns: 100px 1fr 100px 1fr;
+    border-bottom: 1px solid var(--bd)
+  }
+
+  .ig-row:last-child {
+    border-bottom: none
+  }
+
+  .ig-c {
+    padding: 6px 10px;
+    font-size: 11px;
+    color: var(--t1)
+  }
+
+  .ig-l {
+    font-weight: 700;
+    color: var(--t2);
+    background: var(--s3)
+  }
+
+  /* ── FORMS ── */
+  .fld {
+    display: flex;
+    flex-direction: column;
+    gap: 4px
+  }
+
+  .flb {
+    font-size: 9px;
+    font-weight: 800;
+    color: var(--t3);
+    letter-spacing: .1em;
+    display: flex;
+    align-items: center;
+    gap: 5px
+  }
+
+  .fi {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1.5px solid var(--bd);
+    border-radius: var(--rad-sm);
+    font-size: 11px;
+    background: var(--s1);
+    color: var(--t1);
+    transition: all .14s
+  }
+
+  .fi:hover {
+    border-color: var(--bd2)
+  }
+
+  .fi:focus {
+    outline: none;
+    border-color: var(--org);
+    background: var(--org-lt);
+    box-shadow: 0 0 0 3px rgba(232, 119, 12, .1)
+  }
+
+  .fi::placeholder {
+    color: var(--t3)
+  }
+
+  .fi option {
+    background: var(--s1)
+  }
+
+  .ai-fi {
+    border-left: 3px solid var(--org);
+    background: var(--org-lt)
+  }
+
+  .pri-fi {
+    border-left: 3px solid var(--pri);
+    background: var(--pri-lt)
+  }
+
+  .g2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px
+  }
+
+  .g3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px
+  }
+
+  .sp2 {
+    grid-column: 1/-1
+  }
+
+  /* ── SIDEBAR ── */
+  .sbar {
+    width: 188px;
+    background: var(--s1);
+    border-right: 1px solid var(--bd);
+    overflow-y: auto;
+    flex-shrink: 0
+  }
+
+  .sb-sec {
+    padding: 8px 14px 5px;
+    font-size: 9px;
+    font-weight: 800;
+    color: var(--t3);
+    letter-spacing: .12em;
+    background: var(--s3);
+    border-bottom: 1px solid var(--bd)
+  }
+
+  .si {
+    padding: 9px 14px;
+    font-size: 11px;
+    cursor: pointer;
+    color: var(--t2);
+    border-left: 3px solid transparent;
+    border-bottom: 1px solid var(--bd);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all .12s;
+    font-weight: 600
+  }
+
+  .si:hover {
+    background: var(--org-lt);
+    color: var(--org)
+  }
+
+  .si.on {
+    color: var(--org-dk);
+    background: var(--org-lt);
+    border-left-color: var(--org);
+    font-weight: 800
+  }
+
+  .si::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0
+  }
+
+  /* ── BULLETS ── */
+  .brow {
+    display: flex;
+    gap: 9px;
+    align-items: flex-start;
+    padding: 5px 0
+  }
+
+  .bdot {
+    width: 7px;
+    height: 7px;
+    background: var(--org);
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 4px
+  }
+
+  .bta {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 11px;
+    color: var(--t1);
+    line-height: 1.65;
+    padding: 2px 8px;
+    resize: none;
+    overflow: hidden;
+    border-radius: var(--rad-sm)
+  }
+
+  .bta:hover {
+    background: var(--s3)
+  }
+
+  .bta:focus {
+    outline: none;
+    background: var(--org-lt);
+    box-shadow: inset 2px 0 0 var(--org)
+  }
+
+  .xdl {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--t3);
+    font-size: 14px;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--rad-sm)
+  }
+
+  .xdl:hover {
+    background: var(--s3)
+  }
+
+  .add-r {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 8px;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--t3);
+    cursor: pointer;
+    border: none;
+    background: none;
+    letter-spacing: .04em;
+    border-radius: var(--rad-sm);
+    transition: all .13s
+  }
+
+  .add-r:hover {
+    color: var(--org);
+    background: var(--org-lt)
+  }
+
+  /* ── CRITERIA ── */
+  .cr {
+    display: flex;
+    gap: 9px;
+    align-items: flex-start;
+    padding: 9px 12px;
+    border: 1px solid var(--bd);
+    border-radius: var(--rad-sm);
+    margin-bottom: 7px
+  }
+
+  .cr.ok {
+    border-left: 3px solid var(--grn);
+    background: var(--grn-lt)
+  }
+
+  .cr.wn {
+    border-left: 3px solid var(--amb);
+    background: var(--amb-lt)
+  }
+
+  .cdot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid;
+    flex-shrink: 0;
+    margin-top: 2px;
+    cursor: pointer
+  }
+
+  .cr.ok .cdot {
+    background: var(--grn);
+    border-color: var(--grn)
+  }
+
+  .cr.wn .cdot {
+    border-color: var(--amb)
+  }
+
+  .cta {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 11px;
+    color: var(--t1);
+    line-height: 1.65;
+    padding: 0 5px;
+    resize: none;
+    overflow: hidden
+  }
+
+  .cta:focus {
+    outline: none
+  }
+
+  /* ── EDGE CASES ── */
+  .ec {
+    border: 1px solid var(--bd);
+    border-radius: var(--rad-sm);
+    margin-bottom: 8px;
+    overflow: hidden
+  }
+
+  .ect {
+    background: var(--amb-lt);
+    padding: 8px 12px;
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid var(--amb-bd)
+  }
+
+  .ece {
+    background: var(--teal-lt);
+    padding: 8px 12px;
+    display: flex;
+    gap: 8px
+  }
+
+  .eta {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 11px;
+    color: var(--t1);
+    line-height: 1.65;
+    resize: none;
+    overflow: hidden
+  }
+
+  .eta:focus {
+    outline: none
+  }
+
+  /* ── CHECKLIST ── */
+  .ckr {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    padding: 8px 13px;
+    border-bottom: 1px solid var(--bd);
+    cursor: pointer;
+    transition: background .12s;
+    font-size: 11px
+  }
+
+  .ckr:last-child {
+    border-bottom: none
+  }
+
+  .ckr:hover {
+    background: var(--org-lt)
+  }
+
+  .ckr input {
+    margin-top: 1px;
+    cursor: pointer;
+    accent-color: var(--org);
+    flex-shrink: 0
+  }
+
+  .ckr.dk span {
+    color: var(--t3);
+    text-decoration: line-through
+  }
+
+  /* ── PROC STEPS ── */
+  .ps {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border: 1px solid var(--bd);
+    border-radius: var(--rad-sm);
+    margin-bottom: 7px;
+    background: var(--s1);
+    transition: all .22s;
+    border-left: 3px solid transparent
+  }
+
+  .ps.run {
+    border-left-color: var(--org);
+    background: var(--org-lt)
+  }
+
+  .ps.done {
+    border-left-color: var(--grn);
+    background: var(--grn-lt)
+  }
+
+  .pn2 {
+    width: 26px;
+    height: 26px;
+    border: 2px solid var(--bd2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    color: var(--t3)
+  }
+
+  .ps.done .pn2 {
+    background: var(--grn);
+    border-color: var(--grn);
+    color: white
+  }
+
+  .ps.run .pn2 {
+    background: var(--org);
+    border-color: var(--org);
+    color: white
+  }
+
+  .pt {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--t1)
+  }
+
+  .pm {
+    font-size: 10px;
+    color: var(--t2);
+    margin-top: 1px
+  }
+
+  /* ── FORMAT OPTIONS ── */
+  .fmt {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 13px 14px;
+    border: 1.5px solid var(--bd);
+    border-radius: var(--rad-sm);
+    cursor: pointer;
+    margin-bottom: 9px;
+    background: var(--s1);
+    transition: all .14s;
+    position: relative
+  }
+
+  .fmt:hover {
+    border-color: var(--bd2)
+  }
+
+  .fmt.sel-pri {
+    border: 2.5px solid var(--pri);
+    background: var(--pri-lt)
+  }
+
+  .fmt.sel-pdf {
+    border: 2.5px solid var(--org);
+    background: var(--org-lt)
+  }
+
+  .fic {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    padding: 4px
+  }
+
+  .fic img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain
+  }
+
+  .fnm {
+    position: absolute;
+    top: -9px;
+    left: 12px;
+    color: white;
+    font-size: 9px;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 10px;
+    letter-spacing: .05em
+  }
+
+  .fnm-pri {
+    background: var(--pri)
+  }
+
+  .fnm-pdf {
+    background: var(--org)
+  }
+
+  .fnm-def {
+    background: var(--navy)
+  }
+
+  /* ── BOM ITEMS ── */
+  .bom-item {
+    border: 1px solid var(--bd);
+    border-radius: var(--rad-sm);
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all .14s;
+    display: flex;
+    align-items: flex-start;
+    gap: 11px
+  }
+
+  .bom-item:hover {
+    border-color: var(--bd2);
+    box-shadow: 0 1px 5px rgba(26, 40, 69, .07)
+  }
+
+  .bom-item.sel {
+    border-color: var(--pri);
+    background: var(--pri-lt);
+    border-left: 3px solid var(--pri)
+  }
+
+  .bom-item.avail {
+    border-left: 3px solid var(--grn)
+  }
+
+  .bom-item.miss {
+    border-left: 3px solid var(--red)
+  }
+
+  /* ── MISC ── */
+  .pgw {
+    height: 6px;
+    background: var(--s4);
+    border-radius: 100px;
+    overflow: hidden
+  }
+
+  .pgf {
+    height: 100%;
+    background: var(--org);
+    border-radius: 100px;
+    transition: width .5s ease
+  }
+
+  .ftr {
+    height: 44px;
+    background: var(--s1);
+    border-top: 1.5px solid var(--bd);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-shrink: 0;
+    box-shadow: 0 -1px 5px rgba(26, 40, 69, .06)
+  }
+
+  .ti {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-size: 11px;
+    color: var(--t1);
+    padding: 2px 5px;
+    border-radius: var(--rad-sm)
+  }
+
+  .ti:hover {
+    background: var(--s3)
+  }
+
+  .ti:focus {
+    outline: none;
+    background: var(--org-lt);
+    box-shadow: inset 0 -2px 0 var(--org)
+  }
+
+  .av-r {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--bd);
+    transition: background .12s
+  }
+
+  .av-r:last-child {
+    border-bottom: none
+  }
+
+  .av-r:hover {
+    background: var(--s2)
+  }
+
+  .av-pip {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 3px
+  }
+
+  .dz {
+    border: 2px dashed var(--bd2);
+    border-radius: var(--rad);
+    padding: 36px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all .18s;
+    background: var(--s2)
+  }
+
+  .dz.over,
+  .dz:hover {
+    border-color: var(--org);
+    background: var(--org-lt)
+  }
+
+  .pri-banner {
+    background:   linear-gradient(to right, #072f83, #3165eb);
+    border: 1.5px solid var(--pri-md);
+    padding: 14px 22px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+    
+  }
+
+  .pri-banner .banner-text-h {
+    color: white
+  }
+
+  .pri-banner .banner-text-p {
+    color: white
+  }
+
+  @keyframes sp {
+    to {
+      transform: rotate(360deg)
+    }
+  }
+
+  .spin {
+    display: inline-block;
+    border-radius: 50%;
+    animation: sp .7s linear infinite
+  }
+
+  @keyframes fa {
+    from {
+      opacity: 0;
+      transform: translateY(6px)
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0)
+    }
+  }
+
+  .fa {
+    animation: fa .3s ease
+  }
+
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .08)
+  }
+
+  .hero {
+    background: linear-gradient(to right, #072f83, #3165eb);
+    padding: 13px 22px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0
+  }
+</style>
+
+<!-- PRIORITY LOGO SVG COMPONENT (reused inline everywhere) -->
+<template id="prilogo-sm">
+  <img
+    src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+    alt="Priority Logo" style="height:18px; width:auto; vertical-align:middle ">
+</template>
+
+<div class="W" id="app">
+
+  <!-- TOP -->
+  <div class="top">
+    <div class="top-inner"><span>Amazing Business Results</span>
+      <div class="tsep"></div><span class="top-hl">(561) 788-7073</span>
+      <div class="tsep"></div><span class="top-hl">(647) 694-3379</span>
+    </div>
+    <div class="top-inner"><span>Zoho Premium Partner</span>
+      <div class="tsep"></div><span>★★★★★</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <div class="hdr">
+    <div class="logo" onclick="go('dash')">
+      <svg width="131" height="40" viewBox="0 0 203 62" fill="none" aria-hidden="true" focusable="false" role="img">
+        <title>Logo</title>
+        <path
+          d="M26.3518 52.0536H31.0521C32.8147 52.0536 33.5981 53.2287 33.5981 54.4038C33.5981 55.5789 32.8147 56.3622 32.0313 56.5581C33.0105 56.7539 33.7939 57.7332 33.7939 58.7124C33.7939 60.0833 32.8147 61.2584 31.2479 61.2584H26.3518V52.0536ZM28.3102 55.7747H30.6604C31.2479 55.7747 31.6396 55.383 31.6396 54.7955C31.6396 54.2079 31.2479 53.8162 30.6604 53.8162H28.3102V55.7747ZM28.3102 59.4958H30.8562C31.6396 59.4958 32.0313 59.1041 32.0313 58.5166C32.0313 57.929 31.6396 57.5373 30.8562 57.5373H28.3102V59.4958Z"
+          fill="#025A8C"></path>
+        <path
+          d="M37.515 52.0536H39.4735V57.5373C39.4735 58.7124 40.2569 59.6916 41.6278 59.6916C42.9987 59.6916 43.7821 58.9082 43.7821 57.5373V52.0536H45.7406V57.5373C45.7406 59.8875 44.3696 61.2584 41.6278 61.2584C38.8859 61.2584 37.515 59.6916 37.515 57.5373V52.0536Z"
+          fill="#025A8C"></path>
+        <path
+          d="M48.4824 58.3207C49.07 58.9082 50.0492 59.4958 51.4201 59.4958C52.3994 59.4958 52.9869 58.9082 52.9869 58.5166C52.9869 57.929 52.2035 57.5373 51.2243 57.3415C49.6575 56.9498 47.8949 56.5581 47.8949 54.5996C47.8949 53.0328 49.2658 51.8578 51.4201 51.8578C52.791 51.8578 53.9661 52.2495 54.9454 53.0328L53.9661 54.4038C53.1827 53.8162 52.2035 53.4245 51.4201 53.4245C50.6367 53.4245 50.0492 53.8162 50.0492 54.4038C50.0492 54.9913 50.8326 55.1872 51.8118 55.383C53.3786 55.7747 55.1412 56.1664 55.1412 58.1249C55.1412 59.6916 53.9661 61.0626 51.4201 61.0626C49.6575 61.0626 48.4824 60.475 47.5032 59.6916L48.4824 58.3207Z"
+          fill="#025A8C"></path>
+        <path d="M58.4706 61.0626V52.0536H60.4291V61.0626H58.4706Z" fill="#025A8C"></path>
+        <path
+          d="M70.6131 61.0626L66.3045 54.9913V61.0626H64.346V52.0536H66.3045L70.4173 57.929V52.0536H72.3757V61.0626H70.6131Z"
+          fill="#025A8C"></path>
+        <path
+          d="M75.901 61.0626V52.0536H82.3639V53.6204H77.8594V55.5789H82.168V57.1456H77.8594V59.2999H82.3639V61.0626H75.901Z"
+          fill="#025A8C"></path>
+        <path
+          d="M86.2808 58.3207C86.8684 58.9082 87.8476 59.4958 89.2185 59.4958C90.1978 59.4958 90.7853 58.9082 90.7853 58.5166C90.7853 57.929 90.0019 57.5373 89.0227 57.3415C87.4559 56.9498 85.6933 56.5581 85.6933 54.5996C85.6933 53.0328 87.0642 51.8578 89.2185 51.8578C90.5894 51.8578 91.7645 52.2495 92.7438 53.0328L91.7645 54.4038C90.9811 53.8162 90.0019 53.4245 89.2185 53.4245C88.4351 53.4245 87.8476 53.8162 87.8476 54.4038C87.8476 54.9913 88.631 55.1872 89.6102 55.383C91.177 55.7747 92.9396 56.1664 92.9396 58.1249C92.9396 59.6916 91.7645 61.0626 89.2185 61.0626C87.4559 61.0626 86.2808 60.475 85.3016 59.6916L86.2808 58.3207Z"
+          fill="#025A8C"></path>
+        <path
+          d="M96.0732 58.3207C96.6607 58.9082 97.6399 59.4958 99.0109 59.4958C99.9901 59.4958 100.578 58.9082 100.578 58.5166C100.578 57.929 99.7942 57.5373 98.815 57.3415C97.2482 56.9498 95.4856 56.5581 95.4856 54.5996C95.4856 53.0328 96.8565 51.8578 99.0109 51.8578C100.382 51.8578 101.557 52.2495 102.536 53.0328L101.557 54.4038C100.773 53.8162 99.7942 53.4245 99.0109 53.4245C98.2275 53.4245 97.6399 53.8162 97.6399 54.4038C97.6399 54.9913 98.4233 55.1872 99.4025 55.383C100.969 55.7747 102.732 56.1664 102.732 58.1249C102.732 59.6916 101.557 61.0626 99.0109 61.0626C97.2482 61.0626 96.0732 60.475 95.0939 59.6916L96.0732 58.3207Z"
+          fill="#025A8C"></path>
+        <path
+          d="M115.854 61.0626L114.091 57.929H112.72V61.0626H110.762V52.0536H115.07C117.029 52.0536 118.204 53.2287 118.204 54.9913C118.204 56.5581 117.225 57.5373 116.245 57.7332L118.204 61.2584H115.854V61.0626ZM114.679 53.6204H112.72V56.1664H114.679C115.462 56.1664 116.05 55.5789 116.05 54.9913C116.05 54.2079 115.462 53.6204 114.679 53.6204Z"
+          fill="#025A8C"></path>
+        <path
+          d="M121.729 61.0626V52.0536H128.192V53.6204H123.688V55.5789H127.996V57.1456H123.688V59.2999H128.192V61.0626H121.729Z"
+          fill="#025A8C"></path>
+        <path
+          d="M131.913 58.3207C132.501 58.9082 133.48 59.4958 134.851 59.4958C135.83 59.4958 136.418 58.9082 136.418 58.5166C136.418 57.929 135.634 57.5373 134.655 57.3415C133.088 56.9498 131.326 56.5581 131.326 54.5996C131.326 53.0328 132.696 51.8578 134.851 51.8578C136.222 51.8578 137.397 52.2495 138.376 53.0328L137.397 54.4038C136.613 53.8162 135.634 53.4245 134.851 53.4245C134.067 53.4245 133.48 53.8162 133.48 54.4038C133.48 54.9913 134.263 55.1872 135.242 55.383C136.809 55.7747 138.572 56.1664 138.572 58.1249C138.572 59.6916 137.397 61.0626 134.851 61.0626C133.088 61.0626 131.913 60.475 130.934 59.6916L131.913 58.3207Z"
+          fill="#025A8C"></path>
+        <path
+          d="M140.726 52.0536H142.685V57.5373C142.685 58.7124 143.468 59.6916 144.839 59.6916C146.21 59.6916 146.993 58.9082 146.993 57.5373V52.0536H148.952V57.5373C148.952 59.8875 147.581 61.2584 144.839 61.2584C142.097 61.2584 140.726 59.6916 140.726 57.5373V52.0536Z"
+          fill="#025A8C"></path>
+        <path d="M152.281 61.0626V52.0536H154.24V59.4958H158.157V61.0626H152.281Z" fill="#025A8C"></path>
+        <path d="M163.836 61.0626V53.6204H161.094V51.8578H168.341V53.6204H165.795V61.0626H163.836Z" fill="#025A8C">
+        </path>
+        <path
+          d="M171.474 58.3207C172.062 58.9082 173.041 59.4958 174.412 59.4958C175.391 59.4958 175.979 58.9082 175.979 58.5166C175.979 57.929 175.195 57.5373 174.216 57.3415C172.649 57.1456 170.887 56.7539 170.887 54.5996C170.887 53.0328 172.257 51.8578 174.412 51.8578C175.783 51.8578 176.958 52.2495 177.937 53.0328L176.762 54.5996C175.979 54.0121 174.999 53.6204 174.216 53.6204C173.433 53.6204 172.845 54.0121 172.845 54.5996C172.845 55.1872 173.628 55.383 174.608 55.5789C176.174 55.9705 177.937 56.3622 177.937 58.3207C177.937 59.8875 176.762 61.2584 174.216 61.2584C172.453 61.2584 171.278 60.6709 170.299 59.8875L171.474 58.3207Z"
+          fill="#025A8C"></path>
+        <path
+          d="M50.4409 48.7242H55.5329L42.9987 19.7389H38.6901L25.9601 48.7242H31.4438L34.3815 41.4779H47.5032L50.4409 48.7242ZM35.9482 37.7568L40.8444 26.006L45.7406 37.7568H35.9482Z"
+          fill="#595959"></path>
+        <path
+          d="M176.566 32.8606V48.5284H172.062V35.015C172.062 32.6648 169.907 30.7063 167.361 30.7063C165.011 30.7063 163.249 32.0773 162.661 34.0357C162.661 34.4274 162.465 34.6233 162.465 35.015V48.5284H157.961V26.9852H162.465V32.8606C162.465 29.1396 165.599 26.2019 169.516 26.2019C172.649 26.2019 175.391 28.3562 176.174 31.098C176.37 31.4897 176.566 32.0773 176.566 32.8606Z"
+          fill="#595959"></path>
+        <path d="M64.7377 37.3651V48.3325H60.2332V38.5402C61.8 38.3443 63.3668 37.9527 64.7377 37.3651Z" fill="#025A8C">
+        </path>
+        <path
+          d="M78.8387 32.8606C78.8387 33.0565 78.8387 33.0565 78.6428 33.2523V48.5284H74.1383V34.6233C75.9009 34.0357 77.2719 33.4482 78.8387 32.8606Z"
+          fill="#025A8C"></path>
+        <path
+          d="M90.1978 27.1811C88.0434 28.1603 86.085 28.9437 84.1265 29.7271C83.9307 29.7271 83.7348 29.7271 83.539 29.7271C81.9722 29.7271 80.6013 30.3146 79.8179 31.4897C79.4262 31.6856 79.0345 31.6856 78.8387 31.8814L74.3342 33.4482C73.9425 31.2939 71.984 29.7271 69.6339 29.7271C67.2837 29.7271 65.5211 31.2939 64.9335 33.2523C64.9335 33.644 64.7377 33.8399 64.7377 34.2316V36.3859C63.1709 36.7776 61.8 37.1693 60.2332 37.561V26.006H64.7377V32.2731C64.7377 28.552 67.8712 25.6143 71.5923 25.6143C74.53 25.6143 77.076 27.3769 78.0553 29.9229C83.1473 22.0891 90.1978 27.1811 90.1978 27.1811Z"
+          fill="#595959"></path>
+        <path
+          d="M92.5479 32.0773V48.3325H88.2393V34.0357C88.2393 32.2731 87.2601 30.9022 85.6933 30.1188C87.4559 29.3354 89.2185 28.7479 90.9811 27.9645C91.7645 28.7479 92.1562 29.9229 92.3521 30.9022C92.5479 31.2939 92.5479 31.6856 92.5479 32.0773Z"
+          fill="#025A8C"></path>
+        <path
+          d="M115.854 31.098C114.091 28.1603 110.762 26.006 106.845 26.006C104.69 26.006 102.536 26.5935 100.969 27.7686V32.6648C102.144 31.098 104.103 30.1188 106.453 30.1188C109.978 30.1188 112.916 32.4689 112.916 35.4066V37.7568C112.524 37.561 112.328 37.561 112.133 37.3651C110.566 35.7983 108.02 35.015 105.474 35.2108C103.319 35.4066 101.557 36.19 100.186 37.1693C99.2067 37.9527 98.4233 39.1277 98.0316 40.3028C97.8358 41.0862 97.6399 41.6737 97.8358 42.4571C98.0316 46.1782 101.949 49.1159 106.649 48.7242C109.195 48.5284 111.349 47.3533 112.916 45.7865V48.1367H117.225V35.015C117.029 33.8399 116.441 32.2731 115.854 31.098ZM112.524 41.8696C112.524 41.8696 112.524 42.653 111.937 43.6322C111.349 44.6114 109.978 45.7865 107.432 45.7865C105.082 45.7865 103.711 45.199 102.928 44.4156C102.144 43.6322 101.949 42.4571 101.949 41.8696C101.949 41.2821 102.144 40.6945 102.732 39.9111C103.515 38.9319 104.886 38.1485 107.628 38.1485C109.587 38.1485 110.762 38.5402 111.545 38.736C112.72 39.3236 112.916 39.9111 112.916 39.9111V41.8696H112.524Z"
+          fill="#595959"></path>
+        <path
+          d="M122.121 26.5935H140.922V30.7063L128.388 44.6114H140.922V48.9201H122.121V44.8073L135.047 30.5105H122.121V26.5935Z"
+          fill="#595959"></path>
+        <path d="M151.694 26.5935H146.21V48.5284H151.694V26.5935Z" fill="#025A8C"></path>
+        <path d="M151.694 18.5638H146.21V23.2642H151.694V18.5638Z" fill="#025A8C"></path>
+        <path
+          d="M203.005 49.5076V27.5728H198.109V31.4897C196.347 28.552 193.605 26.5935 190.471 26.5935C185.183 26.5935 180.875 31.8814 180.875 38.3443C180.875 40.6945 181.462 42.8488 182.442 44.6114C183.225 46.3741 184.4 47.745 185.771 48.7242C187.142 49.7035 188.709 50.291 190.471 50.291C193.213 50.291 195.563 48.9201 197.13 46.9616C197.522 46.5699 197.913 45.9824 198.109 45.5907V50.4868C198.109 54.0121 195.367 56.7539 191.842 56.7539C188.904 56.7539 186.554 54.7955 185.771 52.2495H180.875C181.658 57.5373 186.358 61.6501 191.842 61.6501C197.913 61.6501 203.005 56.7539 203.005 50.4868C203.005 49.8993 203.005 49.7035 203.005 49.5076ZM197.718 40.6945C197.326 42.4571 196.347 43.8281 195.172 44.8073C194.192 45.5907 193.213 45.9824 192.038 45.9824C190.863 45.9824 189.492 45.3948 188.709 44.6114C187.534 43.6322 186.75 42.0654 186.358 40.4987C186.163 39.9111 186.163 39.1277 186.163 38.3443C186.163 34.0357 188.904 30.5105 192.234 30.5105C195.563 30.5105 198.109 34.0357 198.109 38.3443C198.109 39.1277 197.913 39.9111 197.718 40.6945Z"
+          fill="#595959"></path>
+        <path
+          d="M0.5 44.2197C0.5 44.2197 63.5626 53.0328 130.346 5.63796L127.8 2.70026L142.88 0.350098L136.026 12.8843L133.48 9.75074C133.48 9.75074 76.6843 55.5789 0.5 44.2197Z"
+          fill="#025A8C"></path>
+      </svg>
+    </div>
+    <div style="display:flex;align-items:center;gap:9px">
+      <div class="hdr-badge badge-org">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <circle cx="6" cy="6" r="5" stroke="var(--org)" stroke-width="1.2" fill="var(--org-lt)" />
+          <path d="M3.5 6l2 2 3.5-3.5" stroke="var(--org)" stroke-width="1.3" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+        AI POWERED IMPORT TOOL
+      </div>
+      <div class="hdr-badge badge-pri" onclick="go('export')">
+        <img
+          src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+          alt="Priority Logo" style="height:14px; width:auto; margin-right:6px">
+        ERP Connected
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="text-align:right;border-left:1px solid var(--bd);padding-left:14px">
+        <div style="font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.04em">LINER / STAGE TOOL</div>
+        <div style="font-size:9px;color:var(--t3)">Quote 7461 · Tamarack Valley Energy</div>
+      </div>
+      <div class="av">JC</div>
+      <button class="btn btn-org sm" onclick="go('upload')">Get started now</button>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="nb" onclick="go('dash')">HOME</button>
+    <button class="nb" onclick="go('upload')">NEW JOB</button>
+    <button class="nb on" onclick="go('pack')">EDIT PACK</button>
+    <button class="nb" onclick="go('bom')" id="nav-bom">BOM & CONFIG</button>
+    <button class="nb" onclick="go('export')">EXPORT</button>
+    <button class="nb" onclick="go('list')">MY JOBS</button>
+    <div class="nsep"></div>
+    <button class="btn sm" style="background:var(--pri);color:white;border-radius:20px;padding:6px 15px"
+      onclick="go('export')">Push to Priority ERP →</button>
+    <button class="btn btn-navy sm" onclick="go('export')">Export PDF →</button>
+  </div>
+
+  <!-- WORKFLOW STEPS -->
+  <div class="steps">
+    <div class="step" id="step1" onclick="go('upload')" style="cursor:pointer">
+      <div class="step-n">1</div><span>Upload</span>
+    </div>
+    <div class="sarr">›</div>
+    <div class="step" id="step2" onclick="go('proc')" style="cursor:pointer">
+      <div class="step-n">2</div><span>AI Extraction</span>
+    </div>
+    <div class="sarr">›</div>
+    <div class="step" id="step3" onclick="go('pack')" style="cursor:pointer">
+      <div class="step-n">3</div><span>Edit Job Pack</span>
+    </div>
+    <div class="sarr">›</div>
+    <div class="step" id="step4" onclick="go('bom')" style="cursor:pointer">
+      <div class="step-n">4</div><span>BOM Config</span>
+    </div>
+    <div class="sarr">›</div>
+    <div class="step" id="step5" onclick="go('export')" style="cursor:pointer">
+      <div class="step-n">5</div><span>Push to Priority</span>
+    </div>
+    <div class="sarr">›</div>
+    <div class="step" id="step6" onclick="go('export')" style="cursor:pointer">
+      <div class="step-n">6</div><span>Export PDF</span>
+    </div>
+  </div>
+  <!-- ══ MY JOBS ══ -->
+  <div id="s-list" class="scr">
+    <div class="pb">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+        <div>
+          <h2 style="font-size:20px;font-weight:800;color:var(--navy)">My Job Packs</h2>
+          <div style="font-size:12px;color:var(--t2);margin-top:3px">Manage all your extracted quotes and their Priority
+            ERP status</div>
+        </div>
+        <button class="btn btn-org" onclick="go('upload')">+ New job pack</button>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <!-- Active Job -->
+        <div class="card" style="border-left:4px solid var(--pri);cursor:pointer" onclick="go('dash')">
+          <div style="padding:16px;display:flex;align-items:center;gap:18px">
+            <div
+              style="width:48px;height:48px;background:var(--pri-lt);border-radius:10px;display:flex;align-items:center;justify-content:center;border:1px solid var(--pri-md);flex-shrink:0">
+              <img
+                src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                style="width:70%;height:auto" alt="P">
+            </div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+                <span style="font-size:14px;font-weight:800;color:var(--navy)">Q-7461 · TVE 16-9 HZ 103 CANAL</span>
+                <span class="bdg bp" style="font-size:9px"><img
+                    src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                    style="height:7px;width:auto;margin-right:4px">Synced</span>
+              </div>
+              <div style="font-size:11px;color:var(--t2)">Tamarack Valley Energy · 11 equipment items · AI extracted ·
+                Today 2:34 pm</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-size:16px;font-weight:800;color:var(--org)">$64,887.85</div>
+              <div style="font-size:9px;color:var(--t3);margin-top:2px">Jason Chow</div>
+            </div>
+            <button class="btn btn-org-o sm">Open →</button>
+          </div>
+        </div>
+
+        <!-- Past Job 1 -->
+        <div class="card" style="opacity:.85;cursor:pointer">
+          <div style="padding:16px;display:flex;align-items:center;gap:18px">
+            <div
+              style="width:48px;height:48px;background:var(--s2);border-radius:10px;display:flex;align-items:center;justify-content:center;border:1px solid var(--bd);flex-shrink:0">
+              <img
+                src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                style="width:70%;height:auto;filter:grayscale(1) opacity(.5)" alt="P">
+            </div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+                <span style="font-size:14px;font-weight:800;color:var(--navy)">Q-7458 · CNRL 03-12-075-12-W4</span>
+                <span class="bdg bg" style="font-size:9px">Completed</span>
+              </div>
+              <div style="font-size:11px;color:var(--t2)">Canadian Natural Resources · 8 items · Sep 1, 2025</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-size:16px;font-weight:800;color:var(--t2)">$42,120.00</div>
+              <div style="font-size:9px;color:var(--t3);margin-top:2px">Jason Chow</div>
+            </div>
+            <button class="btn sm">View PDF</button>
+          </div>
+        </div>
+
+        <!-- Past Job 2 -->
+        <div class="card" style="opacity:.85;cursor:pointer">
+          <div style="padding:16px;display:flex;align-items:center;gap:18px">
+            <div
+              style="width:48px;height:48px;background:var(--s2);border-radius:10px;display:flex;align-items:center;justify-content:center;border:1px solid var(--bd);flex-shrink:0">
+              <img
+                src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                style="width:70%;height:auto;filter:grayscale(1) opacity(.5)" alt="P">
+            </div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+                <span style="font-size:14px;font-weight:800;color:var(--navy)">Q-7449 · TOURNI 10-24-068-18-W4</span>
+                <span class="bdg bg" style="font-size:9px">Completed</span>
+              </div>
+              <div style="font-size:11px;color:var(--t2)">Tourmaline Oil Corp · 15 items · Aug 28, 2025</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-size:16px;font-weight:800;color:var(--t2)">$98,450.00</div>
+              <div style="font-size:9px;color:var(--t3);margin-top:2px">Jason Chow</div>
+            </div>
+            <button class="btn sm">View PDF</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══ DASHBOARD ══ -->
+  <div id="s-dash" class="scr">
+    <div class="hero">
+      <div
+        style="background:white; padding:8px 12px; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0">
+        <img
+          src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+          alt="Priority" style="height:25px; width:auto">
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:white">Q-7461 · TVE 16-9 HZ 103 CANAL · 9 of 11 P/Ns matched ·
+          2 parts need BOM</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px">Tamarack Valley Energy · PO 2025D602 ·
+          $64,887.85 · Jason Chow · (403) 540-7016</div>
+      </div>
+      <div style="margin-left:auto;display:flex;gap:8px">
+        <button class="btn btn-pri sm" onclick="go('bom')">
+          <img
+            src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+            alt="Priority" style="height:12px; width:auto; margin-right:4px">
+          BOM Config →
+        </button>
+        <button class="btn btn-org sm" onclick="go('pack')">Edit pack →</button>
+      </div>
+    </div>
+    <div class="pb fa">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px">
+        <div>
+          <div style="font-size:20px;font-weight:800;color:var(--navy)">Good afternoon, Jason.</div>
+          <div style="font-size:12px;color:var(--t2);margin-top:3px">Tamarack Valley Energy · Quote 7461 Rev. 0 ·
+            September 3, 2025</div>
+        </div>
+        <div style="display:flex;gap:8px"><button class="btn btn-org-o sm" onclick="go('upload')">+ New
+            job</button><button class="btn btn-org sm" onclick="go('pack')">Open Q-7461 →</button></div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:20px">
+        <div class="sc">
+          <div class="sc-v">11</div>
+          <div class="sc-l">EQUIPMENT ITEMS</div>
+          <div class="sc-s">9 standard + 2 optional</div>
+        </div>
+        <div class="sc">
+          <div class="sc-v" style="color:var(--pri)">9</div>
+          <div class="sc-l">IN PRIORITY</div>
+          <div class="sc-s">Matched with Software</div>
+        </div>
+        <div class="sc" style="border-top-color:var(--red)">
+          <div class="sc-v" style="color:var(--red)">2</div>
+          <div class="sc-l" style="display:flex;align-items:center;gap:4px">BOM REQUIRED <img
+              src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+              style="height:9px;width:auto"></div>
+          <div class="sc-s">Items 3 & 5</div>
+        </div>
+        <div class="sc sc-pri">
+          <div class="sc-v">$64,887</div>
+          <div class="sc-l">QUOTE TOTAL</div>
+          <div class="sc-s">Priority Import Value</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 308px;gap:14px">
+        <div>
+          <div class="card">
+            <div class="sh"><span class="sh-t">Q-7461 — job summary</span><span class="sh-t"
+                style="font-size:9px;opacity:.85">Tamarack Valley Energy</span></div>
+            <div class="cb">
+              <div class="ig" style="margin-bottom:14px">
+                <div class="ig-row">
+                  <div class="ig-c ig-l">Well name</div>
+                  <div class="ig-c" style="font-weight:800;color:var(--org)">TVE 16-9 HZ 103 CANAL 13-15-70-23-W4</div>
+                  <div class="ig-c ig-l">Quote no.</div>
+                  <div class="ig-c">7461 — Rev. 0</div>
+                </div>
+                <div class="ig-row">
+                  <div class="ig-c ig-l">SURF</div>
+                  <div class="ig-c">16-9-70-23-W4</div>
+                  <div class="ig-c ig-l">BH</div>
+                  <div class="ig-c">103/13-15-70-23-W4</div>
+                </div>
+                <div class="ig-row">
+                  <div class="ig-c ig-l">Attention</div>
+                  <div class="ig-c">Thomas Aiello · (587) 438-5621</div>
+                  <div class="ig-c ig-l">Sales Rep</div>
+                  <div class="ig-c">Jason Chow · (403) 540-7016</div>
+                </div>
+                <div class="ig-row">
+                  <div class="ig-c ig-l">RIG</div>
+                  <div class="ig-c" style="color:var(--t3);font-style:italic">— (no data)</div>
+                  <div class="ig-c ig-l">PO/AFE</div>
+                  <div class="ig-c">2025D602</div>
+                </div>
+                <div class="ig-row">
+                  <div class="ig-c ig-l">Liner</div>
+                  <div class="ig-c">114.3mm · 17.26 kg/m · L-80 LT&C · 1183–1303m · 120m · 2031.13 daN</div>
+                  <div class="ig-c ig-l">Total</div>
+                  <div class="ig-c" style="font-weight:800;color:var(--org)">$64,887.85</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px">
+                <button class="btn btn-org sm" onclick="go('pack')">Edit job pack →</button>
+                <button class="btn btn-pri sm" onclick="go('bom')"><svg width="14" height="14" viewBox="0 0 28 28"
+                    fill="none">
+                    <rect x="2" y="2" width="14" height="14" rx="3" fill="white" opacity=".8" />
+                    <rect x="12" y="12" width="14" height="14" rx="3" fill="white" opacity=".5" />
+                  </svg>BOM Config</button>
+                <button class="btn btn-teal sm" onclick="go('export')">Export</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div class="card">
+            <div class="sh sh-pri">
+              <div style="background:white; padding:4px 8px; border-radius:4px; display:flex; align-items:center;">
+                <img src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg" alt="Priority" style="height:12px; width:auto;">
+              </div>
+              <span class="sh-t" style="margin-top:2px">ERP status</span>
+            </div>
+            <div class="cb">
+              <div style="margin-bottom:12px">
+                <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><span
+                    style="font-size:11px;color:var(--t2)">P/Ns matched</span><span
+                    style="font-size:20px;font-weight:800;color:var(--grn)">9/11</span></div>
+                <div class="pgw" style="height:7px">
+                  <div class="pgf" style="width:82%;background:var(--grn)"></div>
+                </div>
+              </div>
+              <table class="tbl" style="margin-bottom:12px">
+                <tbody>
+                  <tr>
+                    <td>In Priority ERP</td>
+                    <td style="text-align:right"><span class="bdg bg xsm">9 parts</span></td>
+                  </tr>
+                  <tr>
+                    <td>BOM required</td>
+                    <td style="text-align:right"><span class="bdg br2 xsm">Items 3 & 5</span></td>
+                  </tr>
+                  <tr>
+                    <td>Optional items</td>
+                    <td style="text-align:right"><span class="bdg xsm"
+                        style="background:#F9FAFB;color:#6B7280;border-color:#D1D5DB">Items 6 & 10</span></td>
+                  </tr>
+                </tbody>
+              </table>
+              <button class="btn btn-pri" style="width:100%;justify-content:center" onclick="go('bom')">
+                <img
+                  src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                  alt="Priority" style="height:16px; width:auto; margin-right:8px">
+                Configure & Push
+              </button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="sh"><span class="sh-t">Activity feed</span></div>
+            <div>
+              <div class="av-r">
+                <div class="av-pip" style="background:var(--pri)"></div>
+                <div>
+                  <div style="font-size:11px;font-weight:700">Validated with Priority ERP — 9 matches</div>
+                  <div style="font-size:10px;color:var(--t2)">Q-7461 · 9 P/Ns matched · Today 2:34 pm</div>
+                </div>
+              </div>
+              <div class="av-r">
+                <div class="av-pip" style="background:var(--red)"></div>
+                <div>
+                  <div style="font-size:11px;font-weight:700">2 parts flagged for BOM (Items 3 & 5)</div>
+                  <div style="font-size:10px;color:var(--t2)">Not found in Priority catalogue</div>
+                </div>
+              </div>
+              <div class="av-r">
+                <div class="av-pip" style="background:var(--org)"></div>
+                <div>
+                  <div style="font-size:11px;font-weight:700">Quote 7461 uploaded & extracted</div>
+                  <div style="font-size:10px;color:var(--t2)">TVE 16-9 HZ 103 CANAL · Sep 3, 2025</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="background:var(--navy);border-radius:var(--rad);padding:16px;text-align:center">
+            <div style="font-size:11px;font-weight:800;color:white;margin-bottom:3px">ZOHO PREMIUM PARTNER</div>
+            <div style="font-size:18px;margin-bottom:4px">★★★★★</div>
+            <div style="font-size:10px;color:rgba(255,255,255,.65);margin-bottom:12px">amazingbusinessresults.com</div>
+            <div style="display:flex;gap:7px;justify-content:center">
+              <button class="btn btn-org sm">Book a meeting</button>
+              <button class="btn sm"
+                style="background:rgba(255,255,255,.12);color:white;border-color:rgba(255,255,255,.25);border-radius:22px">Partner
+                with us</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══ UPLOAD ══ -->
+  <div id="s-upload" class="scr">
+    <div class="pb">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px">
+        <div>
+          <div style="font-size:20px;font-weight:800;color:var(--navy)">New job pack</div>
+          <div style="font-size:12px;color:var(--t2);margin-top:3px">Upload a quote, stick diagram, or Excel — AI
+            extracts & opens Edit Pack automatically</div>
+        </div>
+        <button class="btn sm" onclick="go('dash')">← Back</button>
+      </div>
+
+      <!-- PRIORITY FIRST ACTION -->
+      <!-- PRIORITY FIRST ACTION -->
+      <!-- PRIORITY FIRST ACTION -->
+      <div class="pri-banner" style="border-radius:var(--rad);margin-bottom:16px">
+        <div
+          style="background:white; padding:8px 14px; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; border:1px solid var(--pri-md)">
+          <img
+            src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+            alt="Priority" style="height:25px; width:auto">
+        </div>
+        <div style="flex:1">
+          <div style="font-size:13px;font-weight:800;" class="banner-text-h">Priority ERP — Verified After Upload</div>
+          <div style="font-size:11px;margin-top:2px" class="banner-text-p">Extracted P/Ns are immediately checked
+            against Priority catalogue.</div>
+        </div>
+        <button class="btn btn-pri-filled sm"
+          style="border-radius:22px;font-weight:800;flex-shrink:0">priority-software.com ↗</button>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 290px;gap:14px;align-items:start">
+        <div class="card">
+          <div class="sh"><span class="sh-t">Upload quote, stick diagram or Excel</span></div>
+          <div class="cb">
+            <div id="dz" class="dz" onclick="document.getElementById('fi').click()"
+              ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')"
+              ondrop="doDrop(event)">
+              <div style="font-size:44px;color:#B8C8D8;margin-bottom:12px">↑</div>
+              <div style="font-size:16px;font-weight:800;color:var(--navy);margin-bottom:5px">Drag and drop your file
+              </div>
+              <div style="font-size:11px;color:var(--t2);margin-bottom:16px">After extraction you are taken directly to
+                Edit Job Pack</div>
+              <div style="display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-bottom:16px">
+                <span class="bdg bb">PDF</span>
+                <span
+                  style="display:inline-flex;align-items:center;padding:3px 9px;font-size:10px;font-weight:700;border-radius:var(--rad-sm);border:1.5px solid;background:#E8F5E9;color:#1B5E20;border-color:#81C784">XLS</span>
+                <span
+                  style="display:inline-flex;align-items:center;padding:3px 9px;font-size:10px;font-weight:700;border-radius:var(--rad-sm);border:1.5px solid;background:#E8F5E9;color:#1B5E20;border-color:#81C784">XLSX</span>
+                <span class="bdg bg">PNG</span><span class="bdg bg">JPG</span><span class="bdg ba">DWG</span>
+              </div>
+              <button class="btn btn-org" onclick="event.stopPropagation();document.getElementById('fi').click()">Browse
+                files</button>
+            </div>
+            <input id="fi" type="file" style="display:none" accept=".pdf,.xls,.xlsx,.png,.jpg,.dwg"
+              onchange="fileChosen(this)">
+            <div id="fp"
+              style="display:none;margin-top:11px;padding:11px 14px;background:var(--grn-lt);border:1.5px solid var(--grn-bd);border-radius:var(--rad-sm);align-items:center;gap:11px">
+              <div
+                style="width:32px;height:32px;background:var(--grn);border-radius:var(--rad-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M3 8l3.5 3.5 6.5-7" stroke="white" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </div>
+              <div style="flex:1">
+                <div id="fpn" style="font-size:11px;font-weight:700;color:var(--grn)">Quote-7461.pdf</div>
+                <div style="font-size:10px;color:var(--t2)">Ready to process</div>
+              </div>
+              <button onclick="clearFile()"
+                style="background:none;border:none;cursor:pointer;color:var(--t2);font-size:18px;line-height:1">×</button>
+            </div>
+
+            <!-- Priority first action indicator -->
+            <div
+              style="margin-top:10px;padding:10px 13px;background:var(--pri-lt);border:1.5px solid var(--pri-md);border-radius:var(--rad-sm);display:flex;align-items:center;gap:10px">
+              <img
+                src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                alt="Priority"
+                style="height:18px; width:auto; flex-shrink:0; background:white; padding:4px 8px; border-radius:4px; border:1px solid var(--pri-md)">
+              <div>
+                <div style="font-size:11px;font-weight:700;color:var(--pri)">Step 1: Priority ERP verification
+                  (automatic)</div>
+                <div style="font-size:10px;color:var(--t2)">All P/Ns checked against Priority catalogue immediately
+                  after AI extraction</div>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:9px;margin-top:12px">
+              <button class="btn btn-org" style="flex:2;justify-content:center" onclick="beginProc()">Analyse with AI
+                →</button>
+              <button class="btn" style="flex:1;justify-content:center"
+                onclick="document.getElementById('fi').click()">Browse</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div class="card">
+            <div class="sh sh-pri"><span class="sh-t">What happens after upload</span></div>
+            <div>
+              <div style="padding:9px 14px;border-bottom:1px solid var(--bd);display:flex;gap:10px;align-items:center">
+                <div
+                  style="width:22px;height:22px;background:var(--pri);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:white;flex-shrink:0">
+                  1</div><span style="font-size:11px">AI extracts Well, BH, SURF, RIG, P/Ns</span>
+              </div>
+              <div
+                style="padding:9px 14px;border-bottom:1px solid var(--bd);display:flex;gap:10px;align-items:center;background:var(--s2)">
+                <div
+                  style="width:22px;height:22px;background:var(--pri);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                  <img
+                    src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                    style="height:11px;width:auto;filter:brightness(0) invert(1)">
+                </div><span style="font-size:11px">Priority ERP verifies all P/Ns</span>
+              </div>
+              <div
+                style="padding:9px 14px;border-bottom:1px solid var(--bd);display:flex;gap:10px;align-items:center;background:var(--org-lt)">
+                <div
+                  style="width:22px;height:22px;background:var(--org);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:white;flex-shrink:0">
+                  3</div>
+                <div>
+                  <div style="font-size:11px;font-weight:800;color:var(--org-dk)">→ Edit Job Pack opens automatically
+                  </div>
+                  <div style="font-size:10px;color:var(--t2)">You are taken here — no click needed</div>
+                </div>
+              </div>
+              <div style="padding:9px 14px;border-bottom:1px solid var(--bd);display:flex;gap:10px;align-items:center">
+                <div
+                  style="width:22px;height:22px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:white;flex-shrink:0">
+                  4</div><span style="font-size:11px">Missing P/Ns configured in BOM screen</span>
+              </div>
+              <div
+                style="padding:9px 14px;border-bottom:1px solid var(--bd);display:flex;gap:10px;align-items:center;background:var(--s2)">
+                <div
+                  style="width:22px;height:22px;background:var(--pri);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                  <img
+                    src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                    style="height:11px;width:auto;filter:brightness(0) invert(1)">
+                </div><span style="font-size:11px;font-weight:700">Push to Priority ERP (1st option)</span>
+              </div>
+              <div style="padding:9px 14px;display:flex;gap:10px;align-items:center">
+                <div
+                  style="width:22px;height:22px;background:#8098B8;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;color:white;flex-shrink:0">
+                  PDF</div><span style="font-size:11px">Export to PDF (2nd option)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══ PROCESSING ══ -->
+  <div id="s-proc" class="scr">
+    <div class="pb" style="display:flex;align-items:center;justify-content:center">
+      <div style="width:100%;max-width:520px">
+        <div style="text-align:center;margin-bottom:22px">
+          <div style="font-size:10px;font-weight:800;letter-spacing:.14em;color:var(--org);margin-bottom:10px">AI
+            EXTRACTION IN PROGRESS</div>
+          <div style="font-size:22px;font-weight:800;color:var(--navy);margin-bottom:4px">Analysing Quote 7461</div>
+          <div style="font-size:12px;color:var(--t2)">Extracting all 11 items · Verifying P/Ns with Priority · Then
+            opening Edit Pack...</div>
+        </div>
+        <div class="card">
+          <div class="sh"><span class="sh-t">Extraction & Priority verification</span><span id="pct-t"
+              style="font-size:11px;font-weight:800;color:white">4%</span></div>
+          <div class="cb">
+            <div
+              style="display:flex;align-items:center;gap:13px;padding:10px 0 14px;border-bottom:1px solid var(--bd);margin-bottom:14px">
+              <div
+                style="width:42px;height:42px;background:var(--org);border-radius:var(--rad-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <rect x="3" y="1" width="10" height="18" rx="2" fill="white" opacity=".4" />
+                  <rect x="10" y="4" width="8" height="14" rx="2" fill="white" opacity=".75" />
+                </svg>
+              </div>
+              <div style="flex:1">
+                <div style="font-size:12px;font-weight:700;color:var(--navy)">
+                  Quote-7461-ITC_114_3mm_Liner-Stage_Tool.pdf</div>
+                <div style="font-size:10px;color:var(--t2);margin-top:2px">2 pages · 11 items · Tamarack Valley Energy ·
+                  Sep 3, 2025</div>
+              </div>
+              <span class="bdg ba" id="pbdg">Processing</span>
+            </div>
+            <div class="pgw" style="height:8px;margin-bottom:16px">
+              <div class="pgf" id="pbar" style="width:4%"></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:7px">
+              <div class="ps" id="ps0" style="border-left-color:var(--org);background:var(--org-lt)">
+                <div class="pn2" id="pi0" style="background:var(--org);border-color:var(--org);color:white">1</div>
+                <div>
+                  <div class="pt">Document ingested</div>
+                  <div class="pm">2 pages · Quote 7461 · 11 equipment items detected</div>
+                </div>
+              </div>
+              <div class="ps" id="ps1" style="opacity:.4">
+                <div class="pn2" id="pi1">2</div>
+                <div>
+                  <div class="pt">Well data extracted</div>
+                  <div class="pm">Well name · BH · SURF · RIG (empty) · PO/AFE 2025D602</div>
+                </div>
+              </div>
+              <div class="ps" id="ps2" style="opacity:.4">
+                <div class="pn2" id="pi2">3</div>
+                <div>
+                  <div class="pt">All 11 items & P/Ns extracted</div>
+                  <div class="pm">LINERHANGER1 · MRLINER · ITCLINER · ITCStack114.3 · IMP-FV-453 + 4 more</div>
+                </div>
+              </div>
+              <div class="ps" id="ps3" style="opacity:.4">
+                <div class="pn2" id="pi3">4</div>
+                <div>
+                  <div class="pt">Priority ERP verification</div>
+                  <div class="pm">9 P/Ns confirmed · Items 3 & 5 not found → BOM required</div>
+                </div>
+              </div>
+              <div class="ps" id="ps4" style="opacity:.4">
+                <div class="pn2" id="pi4">5</div>
+                <div>
+                  <div class="pt">Job pack populated</div>
+                  <div class="pm">All casing, well, service & rental data</div>
+                </div>
+              </div>
+              <div class="ps" id="ps5" style="opacity:.4">
+                <div class="pn2" id="pi5">6</div>
+                <div>
+                  <div class="pt">Opening Edit Job Pack...</div>
+                  <div class="pm">You will be taken there automatically</div>
+                </div>
+              </div>
+            </div>
+            <div id="pdone" style="display:none;margin-top:14px">
+              <div
+                style="padding:12px 14px;background:var(--grn-lt);border:1.5px solid var(--grn-bd);border-radius:var(--rad-sm);display:flex;align-items:center;gap:12px;margin-bottom:9px">
+                <div
+                  style="width:32px;height:32px;background:var(--grn);border-radius:var(--rad-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M3 8l3.5 3.5 6.5-7" stroke="white" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                </div>
+                <div>
+                  <div style="font-size:12px;font-weight:800;color:var(--grn)">Extraction complete — 9 P/Ns matched, 2
+                    need BOM</div>
+                  <div style="font-size:11px;color:var(--t2)">Opening Edit Job Pack now...</div>
+                </div>
+              </div>
+              <div
+                style="padding:11px 13px;background:var(--pri-lt);border:1.5px solid var(--pri-md);border-radius:var(--rad-sm);display:flex;align-items:center;gap:10px">
+                <div class="spin"
+                  style="width:14px;height:14px;border:2.5px solid var(--pri-md);border-top-color:var(--pri);flex-shrink:0">
+                </div>
+                <span style="font-size:11px;font-weight:700;color:var(--pri)">Redirecting to Edit Job Pack</span>
+                <span style="font-size:11px;color:var(--t2)">in <span id="countdown">3</span>s...</span>
+                <button class="btn btn-org sm" style="margin-left:auto" onclick="cancelRedirect()">Open now →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══ EDIT PACK ══ -->
+  <div id="s-pack" class="scr">
+    <div
+      style="padding:10px 18px;background:var(--s1);border-bottom:1.5px solid var(--bd);display:flex;align-items:center;gap:10px;flex-shrink:0;box-shadow:0 1px 4px rgba(26,40,69,.05)">
+      <span
+        style="background:var(--org);color:white;padding:4px 12px;font-size:10px;font-weight:800;letter-spacing:.06em;border-radius:20px;flex-shrink:0">Q-7461</span>
+      <input
+        style="flex:1;font-size:13px;font-weight:800;border:none;background:transparent;color:var(--navy);outline:none;padding:3px 8px;min-width:0;border-radius:var(--rad-sm);transition:background .13s"
+        value="114.3mm Liner / Stage Tool — TVE 16-9 HZ 103 CANAL 13-15-70-23-W4"
+        onfocus="this.style.background='var(--org-lt)'" onblur="this.style.background='transparent'">
+      <div style="display:flex;gap:7px;flex-shrink:0">
+        <button class="btn btn-red-o sm xsm" onclick="go('bom')">⚠ 2 BOM pending</button>
+        <button class="btn btn-pri sm" onclick="go('bom')"><img
+            src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+            alt="Priority" style="height:12px; width:auto; margin-right:4px"> BOM →</button>
+        <button class="btn btn-org sm" onclick="go('export')">Export →</button>
+      </div>
+    </div>
+    <div style="display:flex;flex:1;overflow:hidden">
+      <div class="sbar">
+        <div class="sb-sec">Job info</div>
+        <div class="si on" onclick="scrl('s1')">Metadata</div>
+        <div class="si" onclick="scrl('s2')">Well & casing</div>
+        <div class="si" onclick="scrl('s3')">Business overview</div>
+        <div class="sb-sec">Equipment</div>
+        <div class="si" onclick="scrl('s4')">Liner equipment (11)</div>
+        <div class="si" onclick="scrl('s5')">Service & rentals</div>
+        <div class="sb-sec">Procedures</div>
+        <div class="si" onclick="scrl('s6')">Pre-job prep</div>
+        <div class="si" onclick="scrl('s7')">Running procedures</div>
+        <div class="si" onclick="scrl('s8')">Cementing — 2-stage</div>
+        <div class="sb-sec">Verification</div>
+        <div class="si" onclick="scrl('s9')">Acceptance criteria</div>
+        <div class="si" onclick="scrl('s10')">Edge cases</div>
+        <div class="si" onclick="scrl('s11')">Pre-job checklist</div>
+        <div style="padding:14px;border-top:1px solid var(--bd);margin-top:6px">
+          <div style="font-size:9px;font-weight:800;color:var(--t3);letter-spacing:.1em;margin-bottom:7px">Completeness
+          </div>
+          <div style="font-size:26px;font-weight:800;color:var(--grn);line-height:1;margin-bottom:5px">88%</div>
+          <div class="pgw" style="height:5px;margin-bottom:6px">
+            <div class="pgf" style="width:88%;background:var(--grn)"></div>
+          </div>
+          <div style="font-size:10px;color:var(--red);font-weight:700;margin-bottom:9px">2 BOM items pending</div>
+          <button class="btn btn-pri" style="width:100%;justify-content:center;font-size:10px" onclick="go('bom')"><img
+              src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+              alt="Priority" style="height:12px; width:auto; margin-right:6px">BOM Config</button>
+          <button class="btn btn-org" style="width:100%;justify-content:center;font-size:10px;margin-top:6px"
+            onclick="go('export')">Export →</button>
+        </div>
+      </div>
+
+      <div id="jp" style="padding:16px;background:var(--bg)">
+
+        <div
+          style="display:flex;align-items:center;gap:9px;padding:9px 13px;background:var(--red-lt);border:1.5px solid var(--red-bd);border-radius:var(--rad-sm);font-size:11px">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+            <circle cx="7.5" cy="7.5" r="6.5" stroke="var(--red)" stroke-width="1.3" />
+            <path d="M7.5 4.5v4" stroke="var(--red)" stroke-width="1.5" stroke-linecap="round" />
+            <circle cx="7.5" cy="10.5" r=".8" fill="var(--red)" />
+          </svg>
+          <span style="font-weight:800;color:var(--red)">Items 3 & 5 not in Priority ERP</span><span
+            style="color:var(--t2);margin-left:3px">BOM configuration required before push to Priority.</span>
+          <button class="btn btn-pri-o xsm" style="margin-left:auto" onclick="go('bom')"><img
+              src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+              alt="Priority" style="height:11px; width:auto; margin-right:5px">Configure BOM →</button>
+          <button onclick="this.parentElement.remove()"
+            style="background:none;border:none;cursor:pointer;color:var(--t2);font-size:16px;margin-left:4px">×</button>
+        </div>
+
+        <div
+          style="display:flex;align-items:center;gap:9px;padding:9px 13px;background:var(--org-lt);border:1.5px solid var(--org-md);border-radius:var(--rad-sm);font-size:11px">
+          <div class="spin" style="width:10px;height:10px;border:2px solid var(--org-md);border-top-color:var(--org)">
+          </div>
+          <span style="font-weight:800;color:var(--org-dk)">AI extracted all 11 items + well data from Quote
+            7461.</span><span style="color:var(--t2);margin-left:3px">Orange-bordered = AI-extracted. Verify before
+            export.</span>
+          <button onclick="this.parentElement.remove()"
+            style="margin-left:auto;background:none;border:none;cursor:pointer;color:var(--t2);font-size:16px">×</button>
+        </div>
+
+        <!-- METADATA -->
+        <div class="card" id="s1">
+          <div class="sh"><span class="sh-t">Metadata — Quote 7461</span></div>
+          <div class="cb">
+            <div class="g2" style="margin-bottom:12px">
+              <div class="fld">
+                <div class="flb">Quote no. <span style="color:var(--org)">✦ AI</span></div><input class="fi ai-fi"
+                  value="7461 — Rev. 0 · Sep 3, 2025">
+              </div>
+              <div class="fld">
+                <div class="flb">PO / AFE no. <span style="color:var(--org)">✦ AI</span></div><input class="fi ai-fi"
+                  value="2025D602">
+              </div>
+              <div class="fld">
+                <div class="flb">Attention <span style="color:var(--org)">✦ AI</span></div><input class="fi ai-fi"
+                  value="Thomas Aiello — (587) 438-5621">
+              </div>
+              <div class="fld">
+                <div class="flb">Sales rep</div><input class="fi" value="Jason Chow — (403) 540-7016">
+              </div>
+              <div class="fld">
+                <div class="flb">Customer <span style="color:var(--org)">✦ AI</span></div><input class="fi ai-fi"
+                  value="Tamarack Valley Energy">
+              </div>
+              <div class="fld">
+                <div class="flb">Priority level</div><select class="fi">
+                  <option>High</option>
+                  <option>Urgent</option>
+                  <option>Medium</option>
+                </select>
+              </div>
+            </div>
+            <div
+              style="font-size:9px;font-weight:800;color:var(--t3);letter-spacing:.1em;margin-bottom:8px;padding-top:8px;border-top:1px solid var(--bd)">
+              PRIORITY ERP IMPORT FIELDS</div>
+            <div class="g2">
+              <div class="fld sp2">
+                <div class="flb">Well name <span style="color:var(--org)">✦ AI</span><span
+                    style="background:var(--pri);color:white;padding:1px 6px;border-radius:3px;font-size:8px;font-weight:800;margin-left:5px;display:inline-flex;align-items:center;gap:3px"><img
+                      src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                      style="height:7px;width:auto;filter:brightness(0) invert(1)" alt="P"> Critical</span></div>
+                <input class="fi pri-fi" value="TVE 16-9 HZ 103 CANAL 13-15-70-23-W4">
+                <div style="font-size:9px;color:var(--pri);font-weight:700;margin-top:2px;letter-spacing:.04em">✦
+                  Critical — used as the key for Priority ERP import</div>
+              </div>
+              <div class="fld">
+                <div class="flb">SURF <span style="color:var(--org)">✦ AI</span></div><input class="fi ai-fi"
+                  value="16-9-70-23-W4">
+              </div>
+              <div class="fld">
+                <div class="flb">BH <span style="color:var(--org)">✦ AI</span></div><input class="fi ai-fi"
+                  value="103/13-15-70-23-W4">
+              </div>
+              <div class="fld">
+                <div class="flb">RIG</div><input class="fi" placeholder="— (no data in quote)"
+                  style="border-style:dashed;color:var(--t3)">
+              </div>
+              <div class="fld">
+                <div class="flb">Date <span style="color:var(--org)">✦ AI</span></div><input class="fi ai-fi"
+                  value="September 3, 2025">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- WELL & CASING -->
+        <div class="card" id="s2">
+          <div class="sh"><span class="sh-t">Well & casing information</span><span class="bdg bg"
+              style="font-size:9px">✦ AI extracted</span></div>
+          <div class="cb">
+            <div class="g3" style="margin-bottom:14px">
+              <div class="fld">
+                <div class="flb">TD (mMD) <span style="color:var(--org)">✦</span></div><input class="fi ai-fi"
+                  value="2,358 mMD">
+              </div>
+              <div class="fld">
+                <div class="flb">TVD <span style="color:var(--org)">✦</span></div><input class="fi ai-fi" value="526 m">
+              </div>
+              <div class="fld">
+                <div class="flb">Liner top <span style="color:var(--org)">✦</span></div><input class="fi ai-fi"
+                  value="1,183 m">
+              </div>
+              <div class="fld">
+                <div class="flb">Liner length <span style="color:var(--org)">✦</span></div><input class="fi ai-fi"
+                  value="120 m">
+              </div>
+              <div class="fld">
+                <div class="flb">Overlap <span style="color:var(--org)">✦</span></div><input class="fi ai-fi"
+                  value="21 m">
+              </div>
+              <div class="fld">
+                <div class="flb">Liner wt. (air) <span style="color:var(--org)">✦</span></div><input class="fi ai-fi"
+                  value="2,031.13 daN">
+              </div>
+            </div>
+            <div style="font-size:9px;font-weight:800;color:var(--t3);letter-spacing:.09em;margin-bottom:8px">Casing
+              strings</div>
+            <div style="overflow-x:auto">
+              <table class="tbl" style="table-layout:fixed;min-width:500px">
+                <colgroup>
+                  <col style="width:130px">
+                  <col style="width:100px">
+                  <col style="width:70px">
+                  <col style="width:76px">
+                  <col style="width:55px">
+                  <col style="width:80px">
+                  <col style="width:68px">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>String</th>
+                    <th>Interval</th>
+                    <th>Size</th>
+                    <th>Weight</th>
+                    <th>Grade</th>
+                    <th>Threads</th>
+                    <th>Hole</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><input class="ti" value="Intermediate Casing"></td>
+                    <td><input class="ti" value="0 – 1,204 m"></td>
+                    <td><input class="ti" value="177.8 mm"></td>
+                    <td><input class="ti" value="34.23 kg/m"></td>
+                    <td><input class="ti" value="J-55"></td>
+                    <td><input class="ti" value="LT&C"></td>
+                    <td><input class="ti" value="222 mm"></td>
+                  </tr>
+                  <tr style="background:var(--org-lt)">
+                    <td><input class="ti" value="Liner (prod.)" style="font-weight:700;background:transparent"></td>
+                    <td><input class="ti" value="1,183–1,303 m" style="background:transparent"></td>
+                    <td><input class="ti" value="114.3 mm" style="background:transparent"></td>
+                    <td><input class="ti" value="17.26 kg/m" style="background:transparent"></td>
+                    <td><input class="ti" value="L-80" style="background:transparent"></td>
+                    <td><input class="ti" value="LT&C" style="background:transparent"></td>
+                    <td><input class="ti" value="159 mm" style="background:transparent"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- BUSINESS OVERVIEW -->
+        <div class="card" id="s3">
+          <div class="sh"><span class="sh-t">Business overview</span><button class="btn sm"
+              style="background:rgba(255,255,255,.2);color:white;border-color:rgba(255,255,255,.3);border-radius:14px"
+              onclick="sendPrompt('Improve business overview for Q-7461 TVE 16-9 liner stage tool')">✦ Improve
+              ↗</button></div>
+          <div class="cb">
+            <div id="biz">
+              <div class="brow">
+                <div class="bdot"></div><textarea class="bta" rows="2"
+                  oninput="ar(this)">Source: Quote 7461 Rev. 0, September 3, 2025. Import Tool Corp. — Thomas Aiello, Tamarack Valley Energy. Well: TVE 16-9 HZ 103 CANAL 13-15-70-23-W4. PO/AFE: 2025D602.</textarea><button
+                  class="xdl" onclick="delrow(this)">×</button>
+              </div>
+              <div class="brow">
+                <div class="bdot"></div><textarea class="bta" rows="2"
+                  oninput="ar(this)">What: Run and cement 114.3mm liner/stage tool from 1,183m to 1,303m (120m, 21m overlap) using BOT CMC Dual Cone Liner Hanger, ITC MR Setting Collar, ITC 2-Stage Hydraulic Cementing Collar (BOM pending), and ITC External Casing Packer.</textarea><button
+                  class="xdl" onclick="delrow(this)">×</button>
+              </div>
+              <div class="brow">
+                <div class="bdot"></div><textarea class="bta" rows="2"
+                  oninput="ar(this)">Constraint: Import Tool does not buy rig time. Equipment lost-in-hole invoiced at replacement cost. Prices firm 7 days from quote. Return policy: 35% restocking fee within 30 days, no returns beyond 30 days.</textarea><button
+                  class="xdl" onclick="delrow(this)">×</button>
+              </div>
+            </div><button class="add-r" onclick="ab('biz')">+ Add point</button>
+          </div>
+        </div>
+
+        <!-- LINER EQUIPMENT — ALL 11 ITEMS -->
+        <div class="card" id="s4">
+          <div class="sh">
+            <span class="sh-t">Liner equipment required — all 11 items</span>
+            <div style="display:flex;align-items:center;gap:7px">
+              <span class="bdg bg" style="font-size:9px">✦ AI</span>
+              <span class="bdg br2" style="font-size:9px">2 BOM</span>
+            </div>
+          </div>
+          <div style="overflow-x:auto">
+            <table class="tbl" id="equip-tbl" style="table-layout:fixed;min-width:660px">
+              <colgroup>
+                <col style="width:26px">
+                <col style="width:26px">
+                <col style="width:88px">
+                <col style="width:60px">
+                <col style="width:200px">
+                <col style="width:44px">
+                <col style="width:48px">
+                <col style="width:74px">
+                <col style="width:76px">
+                <col style="width:22px">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Qty</th>
+                  <th>P/N</th>
+                  <th>Size</th>
+                  <th>Description</th>
+                  <th>Grade</th>
+                  <th>Thread</th>
+                  <th>Unit cost</th>
+                  <th>ERP Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- 1 -->
+                <tr>
+                  <td style="text-align:center;font-weight:800;color:var(--org)">1</td>
+                  <td style="text-align:center">1</td>
+                  <td><span class="pn">LINERHANGER1</span></td>
+                  <td style="font-size:10px">114.3 mm</td>
+                  <td><input class="ti" value="BOT Type CMC Dual Cone Mech. Set Liner Hanger (P-110, J-55/K-55)"></td>
+                  <td><input class="ti" value="P-110" style="width:38px"></td>
+                  <td><input class="ti" value="LT&C" style="width:38px"></td>
+                  <td style="font-weight:700;color:var(--org-dk)">$9,975.00</td>
+                  <td><span class="bdg bp" style="font-size:9px"><img
+                        src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                        style="height:11px;width:auto;margin-right:4px">In ERP</span></td>
+                  <td><button onclick="this.closest('tr').remove()"
+                      style="background:none;border:none;cursor:pointer;color:#B0C4D8;font-size:13px">×</button></td>
+                </tr>
+                <!-- 2 -->
+                <tr style="background:var(--s2)">
+                  <td style="text-align:center;font-weight:800;color:var(--org)">2</td>
+                  <td style="text-align:center">1</td>
+                  <td><span class="pn">MRLINER</span></td>
+                  <td style="font-size:10px">114.3 mm</td>
+                  <td><input class="ti" value="ITC MR Setting Collar & 3.0m PBR Tieback Extension"
+                      style="background:transparent"></td>
+                  <td><input class="ti" value="L-80" style="width:38px;background:transparent"></td>
+                  <td><input class="ti" value="LT&C" style="width:38px;background:transparent"></td>
+                  <td style="font-weight:700;color:var(--org-dk)">$9,684.10</td>
+                  <td><span class="bdg bp" style="font-size:9px"><img
+                        src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                        style="height:11px;width:auto;margin-right:4px">In ERP</span></td>
+                  <td><button onclick="this.closest('tr').remove()"
+                      style="background:none;border:none;cursor:pointer;color:#B0C4D8;font-size:13px">×</button></td>
+                </tr>
+                <!-- 3 — NO P/N — BOM REQUIRED -->
+                <tr style="background:var(--red-lt)">
+                  <td style="text-align:center;font-weight:800;color:var(--org)">3</td>
+                  <td style="text-align:center">1</td>
+                  <td><span class="pn-miss">NO P/N</span></td>
+                  <td style="font-size:10px">114.3 mm</td>
+                  <td><input class="ti" value="ITC 2 Stage Hydraulic Cementing Collar, 103.42 MPa HSN Seals"
+                      style="background:transparent"></td>
+                  <td><input class="ti" value="P-110" style="width:38px;background:transparent"></td>
+                  <td><input class="ti" value="LT&C" style="width:38px;background:transparent"></td>
+                  <td style="font-weight:700;color:var(--org-dk)">$10,676.00</td>
+                  <td><button class="btn btn-red-o xsm" onclick="go('bom')"><img
+                        src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                        style="height:7px;width:auto;margin-right:4px">BOM →</button></td>
+                  <td><button onclick="this.closest('tr').remove()"
+                      style="background:none;border:none;cursor:pointer;color:#B0C4D8;font-size:13px">×</button></td>
+                </tr>
+                <!-- 4 -->
+                <tr style="background:var(--s2)">
+                  <td style="text-align:center;font-weight:800;color:var(--org)">4</td>
+                  <td style="text-align:center">1</td>
+                  <td><span class="pn">ITCLINER</span></td>
+                  <td style="font-size:10px">114.3 mm</td>
+                  <td><input class="ti" value="ITC External Casing Packer c/w 3m Element"
+                      style="background:transparent"></td>
+                  <td><input class="ti" value="P-110" style="width:38px;background:transparent"></td>
+                  <td><input class="ti" value="LT&C" style="width:38px;background:transparent"></td>
+                  <td style="font-weight:700;color:var(--org-dk)">$18,150.00</td>
+                  <td><span class="bdg bp" style="font-size:9px"><img
+                        src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                        style="height:11px;width:auto;margin-right:4px">In ERP</span></td>
+                  <td><button onclick="this.closest('tr').remove()"
+                      style="background:none;border:none;cursor:pointer;color:#B0C4D8;font-size:13px">×</button></td>
+                </tr>
+                <!-- 5 — NO P/N — BOM REQUIRED -->
+                <tr style="background:var(--red-lt)">
+                  <td style="text-align:center;font-weight:800;color:var(--org)">5</td>
+                  <td style="text-align:center">1</td>
+                  <td><span class="pn-miss">NO P/N</span></td>
+                  <td style="font-size:10px">114.3 mm</td>
+                  <td><input class="ti" value="ITC Casing Handling Pup Joint" style="background:transparent"></td>
+                  <td><input class="ti" value="P-110" style="width:38px;background:transparent"></td>
+                  <td><input class="ti" value="LT&C" style="width:38px;background:transparent"></td>
+                  <td style="font-weight:700;color:var(--org-dk)">$1,010.00</td>
+                  <td><button class="btn btn-red-o xsm" onclick="go('bom')"><img
+                        src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                        style="height:7px;width:auto;margin-right:4px">BOM →</button></td>
+                  <td><button onclick="this.closest('tr').remove()"
+                      style="background:none;border:none;cursor:pointer;color:#B0C4D8;font-size:13px">×</button></td>
+                </tr>
+                <!-- 6 — OPTIONAL -->
+                <tr class="opt">
+                  <td style="text-align:center;font-weight:700;color:#888">6</td>
+                  <td style="text-align:center">1</td>
+                  <td><span class="bdg bopt xsm">Optional</span></td>
+                  <td style="font-size:10px">114.3 mm</td>
+                  <td><input class="ti" value="Optional — ITC External Casing Packer c/w 1m Element" style="color:#888">
+                  </td>
+                  <td><input class="ti" value="L-80" style="width:38px;color:#888"></td>
+                  <td><input class="ti" value="LT&C" style="width:38px;color:#888"></td>
+                  <td style="color:#888">$14,466.00</td>
+                  <td><span class="bdg bopt" style="font-size:9px">Optional</span></td>
+                  <td><button onclick="this.closest('tr').remove()"
+                      style="background:none;border:none;cursor:pointer;color:#B0C4D8;font-size:13px">×</button></td>
+                </tr>
+                <!-- 7 -->
+                <tr>
+                  <td style="text-align:center;font-weight:800;color:var(--org)">7</td>
+                  <td style="text-align:center">1</td>
+                  <td><span class="pn">TOOL1</span></td>
+                  <td style="font-size:10px">114.3 mm</td>
+                  <td><input class="ti" value="Drill Pipe Pump Down Plug"></td>
+                  <td><input class="ti" value="—" style="width:38px"></td>
+                  <td><input class="ti" value="—" style="width:38px"></td>
+                  <td style="font-weight:700;color:var(--org-dk)">$1,985.75</td>
+                  <td><span class="bdg bp" style="font-size:9px"><img
+                        src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                        style="height:11px;width:auto;margin-right:4px">In ERP</span></td>
+                  <td><button onclick="this.closest('tr').remove()"
+                      style="background:none;border:none;cursor:pointer;color:#B0C4D8;font-size:13px">×</button></td>
+                </tr>
+                <!-- 8 -->
+                <tr style="background:var(--s2)">
+                  <td style="text-align:center;font-weight:800;color:var(--org)">8</td>
+                  <td style="text-align:center">1</td>
+                  <td><span class="pn">ITCStack114.3</span></td>
+                  <td style="font-size:10px">114.3 mm</td>
+                  <td><input class="ti" value="ITC Type 1 Liner Wiper Plug c/w Modified Stage Collar Closing Nose"
+                      style="background:transparent"></td>
+                  <td><input class="ti" value="—" style="width:38px;background:transparent"></td>
+                  <td><input class="ti" value="—" style="width:38px;background:transparent"></td>
+                  <td style="font-weight:700;color:var(--org-dk)">$3,198.00</td>
+                  <td><span class="bdg bp" style="font-size:9px"><img
+                        src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                        style="height:11px;width:auto;margin-right:4px">In ERP</span></td>
+                  <td><button onclick="this.closest('tr').remove()"
+                      style="background:none;border:none;cursor:pointer;color:#B0C4D8;font-size:13px">×</button></td>
+                </tr>
+                <!-- 9 -->
+                <tr>
+                  <td style="text-align:center;font-weight:800;color:var(--org)">9</td>
+                  <td style="text-align:center">1</td>
+                  <td><span class="pn">IMP-FV-453</span></td>
+                  <td style="font-size:10px">114.3 mm</td>
+                  <td><input class="ti" value="ITC Combination Float/Landing Collar c/w Ball Receiver"></td>
+                  <td><input class="ti" value="L-80" style="width:38px"></td>
+                  <td><input class="ti" value="LT&C" style="width:38px"></td>
+                  <td style="font-weight:700;color:var(--org-dk)">$1,475.00</td>
+                  <td><span class="bdg bp" style="font-size:9px"><img
+                        src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                        style="height:11px;width:auto;margin-right:4px">In ERP</span></td>
+                  <td><button onclick="this.closest('tr').remove()"
+                      style="background:none;border:none;cursor:pointer;color:#B0C4D8;font-size:13px">×</button></td>
+                </tr>
+                <!-- 10 — OPTIONAL -->
+                <tr class="opt">
+                  <td style="text-align:center;font-weight:700;color:#888">10</td>
+                  <td style="text-align:center">1</td>
+                  <td><span class="bdg bopt xsm">Optional</span></td>
+                  <td style="font-size:10px">114.3 mm</td>
+                  <td><input class="ti" value="Optional — ITC Fluted Stand-Off Band for 159mm Hole Size"
+                      style="color:#888"></td>
+                  <td><input class="ti" value="—" style="width:38px;color:#888"></td>
+                  <td><input class="ti" value="—" style="width:38px;color:#888"></td>
+                  <td style="color:#888">$23.90</td>
+                  <td><span class="bdg bopt" style="font-size:9px">Optional</span></td>
+                  <td><button onclick="this.closest('tr').remove()"
+                      style="background:none;border:none;cursor:pointer;color:#B0C4D8;font-size:13px">×</button></td>
+                </tr>
+                <!-- 11 -->
+                <tr style="background:var(--s2)">
+                  <td style="text-align:center;font-weight:800;color:var(--org)">11</td>
+                  <td style="text-align:center">1</td>
+                  <td><span class="pn">TOOL2</span></td>
+                  <td style="font-size:10px">114.3 mm</td>
+                  <td><input class="ti" value="ITC Threadlock" style="background:transparent"></td>
+                  <td><input class="ti" value="—" style="width:38px;background:transparent"></td>
+                  <td><input class="ti" value="—" style="width:38px;background:transparent"></td>
+                  <td style="font-weight:700;color:var(--org-dk)">$34.00</td>
+                  <td><span class="bdg bp" style="font-size:9px"><img
+                        src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                        style="height:11px;width:auto;margin-right:4px">In ERP</span></td>
+                  <td><button onclick="this.closest('tr').remove()"
+                      style="background:none;border:none;cursor:pointer;color:#B0C4D8;font-size:13px">×</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div
+            style="padding:7px 12px;border-top:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:10px;color:var(--red);font-weight:700">▲ Items 3 & 5 require BOM before Priority push
+              &nbsp;·&nbsp; <span style="color:#6B7280;font-style:italic">Items 6 & 10 are optional — no net
+                amount</span></span>
+            <button class="btn btn-pri xsm" onclick="go('bom')"><svg width="11" height="11" viewBox="0 0 28 28"
+                fill="none">
+                <rect x="2" y="2" width="14" height="14" rx="3" fill="white" opacity=".8" />
+                <rect x="12" y="12" width="14" height="14" rx="3" fill="white" opacity=".5" />
+              </svg>Configure BOM →</button>
+          </div>
+        </div>
+
+        <!-- SERVICE & RENTALS -->
+        <div class="card" id="s5">
+          <div class="sh"><span class="sh-t">Service & rentals</span><span
+              style="font-size:13px;font-weight:800;color:white">$64,887.85</span></div>
+          <div style="overflow-x:auto">
+            <table class="tbl">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>P/N</th>
+                  <th>Description</th>
+                  <th>Unit</th>
+                  <th>Unit cost</th>
+                  <th>Net amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="text-align:center;font-weight:800;color:var(--org)">12</td>
+                  <td><span class="pn">RUNNINGTOOL</span></td>
+                  <td><input class="ti" value="114.3mm ITC Mechanical Liner Running Tool"></td>
+                  <td>/ Job</td>
+                  <td style="font-weight:700;color:var(--org-dk)">$2,575.00</td>
+                  <td style="font-weight:700;color:var(--org-dk)">$2,575.00</td>
+                </tr>
+                <tr style="background:var(--s2)">
+                  <td style="text-align:center;font-weight:800;color:var(--org)">13</td>
+                  <td><span class="pn">LFTNIPPLE</span></td>
+                  <td><input class="ti" value="ITC Liner, HD Cement/Plug Release Head/Swivel"
+                      style="background:transparent"></td>
+                  <td>/ Job</td>
+                  <td style="font-weight:700;color:var(--org-dk)">$2,775.00</td>
+                  <td style="font-weight:700;color:var(--org-dk)">$2,775.00</td>
+                </tr>
+                <tr>
+                  <td style="text-align:center;font-weight:800;color:var(--org)">14</td>
+                  <td><span class="pn">PBRPACKOFFBUSH</span></td>
+                  <td><input class="ti" value="127mm ITC Retrievable PBR Pack-Off Assembly"></td>
+                  <td>/ Job</td>
+                  <td style="font-weight:700;color:var(--org-dk)">$1,975.00</td>
+                  <td style="font-weight:700;color:var(--org-dk)">$1,975.00</td>
+                </tr>
+                <tr style="background:var(--s2)">
+                  <td style="text-align:center;font-weight:800;color:var(--org)">15</td>
+                  <td><span class="pn">PBRTIEBACKEXT</span></td>
+                  <td><input class="ti" value="ITC Drill Pipe Pup Joint c/w with Junk Bonnet"
+                      style="background:transparent"></td>
+                  <td>/ Job</td>
+                  <td style="font-weight:700;color:var(--org-dk)">$975.00</td>
+                  <td style="font-weight:700;color:var(--org-dk)">$975.00</td>
+                </tr>
+                <tr>
+                  <td style="text-align:center;font-weight:800;color:var(--org)">16</td>
+                  <td style="font-size:10px;color:var(--t3)">—</td>
+                  <td><input class="ti" value="Environmental, Carbon Levy, Health And Safety Fee"></td>
+                  <td>/ Job</td>
+                  <td style="font-weight:700;color:var(--org-dk)">$400.00</td>
+                  <td style="font-weight:700;color:var(--org-dk)">$400.00</td>
+                </tr>
+                <tr class="opt">
+                  <td style="text-align:center;font-weight:700;color:#888">17</td>
+                  <td style="color:#888;font-size:10px">—</td>
+                  <td><input class="ti" value="Import Tool Service Operator" style="color:#888"></td>
+                  <td style="color:#888">/ Day</td>
+                  <td style="color:#888">$1,485.00</td>
+                  <td style="color:#888;font-style:italic">per day</td>
+                </tr>
+                <tr class="opt" style="background:var(--s2)">
+                  <td style="text-align:center;font-weight:700;color:#888">18</td>
+                  <td style="color:#888;font-size:10px">—</td>
+                  <td><input class="ti" value="Import Tool Subsistence" style="color:#888;background:transparent"></td>
+                  <td style="color:#888">/ Day</td>
+                  <td style="color:#888">$225.00</td>
+                  <td style="color:#888;font-style:italic">per day</td>
+                </tr>
+                <tr class="opt">
+                  <td style="text-align:center;font-weight:700;color:#888">19</td>
+                  <td style="color:#888;font-size:10px">—</td>
+                  <td><input class="ti" value="Kilometerage — Edmonton to Location and Return" style="color:#888"></td>
+                  <td style="color:#888">/ km</td>
+                  <td style="color:#888">$1.90</td>
+                  <td style="color:#888;font-style:italic">per km</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div
+            style="background:var(--org);padding:8px 14px;display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:10px;font-weight:800;color:white;letter-spacing:.06em">TOTAL (excl. per-day & per-km
+              items)</span>
+            <span style="font-size:15px;font-weight:800;color:white">$64,887.85</span>
+          </div>
+        </div>
+
+        <!-- PRE-JOB PREP -->
+        <div class="card" id="s6">
+          <div class="sh"><span class="sh-t">Pre-job preparation</span><button class="btn sm"
+              style="background:rgba(255,255,255,.2);color:white;border-color:rgba(255,255,255,.3);border-radius:14px"
+              onclick="sendPrompt('Any missing pre-job prep steps for Q-7461 114.3mm liner?')">✦ Check ↗</button></div>
+          <div class="cb">
+            <div id="prep">
+              <div class="brow">
+                <div class="bdot"></div><textarea class="bta" rows="2"
+                  oninput="ar(this)">Verify all 11 items against Q-7461 LOM data sheets — confirm no transport damage. Confirm BOT CMC Liner Hanger operating parameters: Cone OD 156.16mm, Max Hang 44,751 daN (J-55/K-55).</textarea><button
+                  class="xdl" onclick="delrow(this)">×</button>
+              </div>
+              <div class="brow">
+                <div class="bdot"></div><textarea class="bta" rows="2"
+                  oninput="ar(this)">Confirm BOM for Item 3 (ITC 2-Stage Hydraulic Cementing Collar) and Item 5 (ITC Casing Handling Pup Joint) are complete in Priority ERP before mobilisation.</textarea><button
+                  class="xdl" onclick="delrow(this)">×</button>
+              </div>
+              <div class="brow">
+                <div class="bdot"></div><textarea class="bta" rows="2"
+                  oninput="ar(this)">Record casing tally for 177.8mm J-55 LT&C (0–1204m) and confirm 114.3mm liner drift passes for all running tools (RUNNINGTOOL + LFTNIPPLE).</textarea><button
+                  class="xdl" onclick="delrow(this)">×</button>
+              </div>
+            </div><button class="add-r" onclick="ab('prep')">+ Add step</button>
+          </div>
+        </div>
+
+        <!-- RUNNING PROCEDURES -->
+        <div class="card" id="s7">
+          <div class="sh"><span class="sh-t">Running procedures</span></div>
+          <div class="cb">
+            <div id="run">
+              <div class="brow">
+                <div class="bdot"></div><textarea class="bta" rows="2"
+                  oninput="ar(this)">Run 114.3mm liner in order: Item 9 (IMP-FV-453 Float/Landing Collar) → liner joints → Item 4 (ITCLINER External Casing Packer) → Item 3 (2-Stage Cementing Collar) → Item 2 (MRLINER Setting Collar 3.0m PBR) → Item 1 (LINERHANGER1 BOT CMC Liner Hanger). Make-up per ITC specs.</textarea><button
+                  class="xdl" onclick="delrow(this)">×</button>
+              </div>
+              <div class="brow">
+                <div class="bdot"></div><textarea class="bta" rows="2"
+                  oninput="ar(this)">Set liner hanger at 1,183m top of liner. Confirm weight indicator drop consistent with liner weight 2,031.13 daN. Max hanging capacity (J-55/K-55): 44,751 daN.</textarea><button
+                  class="xdl" onclick="delrow(this)">×</button>
+              </div>
+            </div><button class="add-r" onclick="ab('run')">+ Add step</button>
+          </div>
+        </div>
+
+        <!-- CEMENTING 2-STAGE -->
+        <div class="card" id="s8">
+          <div class="sh"><span class="sh-t">Cementing — 2-stage procedure</span></div>
+          <div class="cb">
+            <div id="cement">
+              <div class="brow">
+                <div class="bdot"></div><textarea class="bta" rows="2"
+                  oninput="ar(this)">Stage 1: Cement through shoe track via Item 9 float/baffle. Bump wiper plug (Item 8 — ITCStack114.3) at designed pressure. Hold 2 min, confirm floats holding.</textarea><button
+                  class="xdl" onclick="delrow(this)">×</button>
+              </div>
+              <div class="brow">
+                <div class="bdot"></div><textarea class="bta" rows="2"
+                  oninput="ar(this)">Stage 2: Open cementing collar (Item 3) at 20.69 MPa (Opening Seat ID 63.5mm). Pump Stage 2 annulus cement. Close at 10.34 MPa (Closing Seat ID 79.38mm). Burst rating: 110.76 MPa. Hold pressure, verify integrity.</textarea><button
+                  class="xdl" onclick="delrow(this)">×</button>
+              </div>
+            </div><button class="add-r" onclick="ab('cement')">+ Add step</button>
+          </div>
+        </div>
+
+        <!-- ACCEPTANCE CRITERIA -->
+        <div class="card" id="s9">
+          <div class="sh"><span class="sh-t">Acceptance criteria</span><button class="btn sm"
+              style="background:rgba(255,255,255,.2);color:white;border-color:rgba(255,255,255,.3);border-radius:14px"
+              onclick="sendPrompt('Check if Q-7461 acceptance criteria are binary pass/fail')">✦ Validate ↗</button>
+          </div>
+          <div class="cb">
+            <div id="acl">
+              <div class="cr ok">
+                <div class="cdot" onclick="tc(this)"></div><textarea class="cta" rows="2"
+                  oninput="ar(this)">LINERHANGER1 sets: weight indicator drops confirming cone engagement in 177.8mm J-55 casing at 1,183m. Hang load within expected range (max 44,751 daN).</textarea><button
+                  class="xdl" onclick="dbCr(this)">×</button>
+              </div>
+              <div class="cr ok">
+                <div class="cdot" onclick="tc(this)"></div><textarea class="cta" rows="2"
+                  oninput="ar(this)">RUNNINGTOOL (Item 12) releases: drill string recovers full weight. Liner weight remains on hanger after tool release.</textarea><button
+                  class="xdl" onclick="dbCr(this)">×</button>
+              </div>
+              <div class="cr ok">
+                <div class="cdot" onclick="tc(this)"></div><textarea class="cta" rows="2"
+                  oninput="ar(this)">Stage 2 cementing collar (Item 3) opens at 20.69 MPa ±10%. Closes confirmed at 10.34 MPa with no cement bypass detected at surface.</textarea><button
+                  class="xdl" onclick="dbCr(this)">×</button>
+              </div>
+              <div class="cr wn">
+                <div class="cdot" onclick="tc(this)"></div><textarea class="cta" rows="2"
+                  oninput="ar(this)">ITCLINER (Item 4) External Casing Packer inflates: OD does not exceed 146.06mm inside 177.8mm casing. Opening and closing pressure confirmed at 8.27 MPa each.</textarea><button
+                  class="xdl" onclick="dbCr(this)">×</button>
+              </div>
+              <div class="cr ok">
+                <div class="cdot" onclick="tc(this)"></div><textarea class="cta" rows="2"
+                  oninput="ar(this)">IMP-FV-453 (Item 9) float check passes: reverse circulation test confirms floats holding before running liner.</textarea><button
+                  class="xdl" onclick="dbCr(this)">×</button>
+              </div>
+            </div><button class="add-r" onclick="addC()">+ Add criterion</button>
+          </div>
+        </div>
+
+        <!-- EDGE CASES -->
+        <div class="card" id="s10">
+          <div class="sh"><span class="sh-t">Edge cases</span><button class="btn sm"
+              style="background:rgba(255,255,255,.2);color:white;border-color:rgba(255,255,255,.3);border-radius:14px"
+              onclick="sendPrompt('Generate 2 more edge cases for Q-7461 114.3mm liner stage tool')">✦ Generate
+              ↗</button></div>
+          <div class="cb">
+            <div id="edgel">
+              <div class="ec">
+                <div class="ect"><span class="bdg ba" style="font-size:9px;flex-shrink:0">Test</span><textarea
+                    class="eta" rows="1" oninput="ar(this)"
+                    style="font-weight:700">Stage 2 collar (Item 3) fails to open at 20.69 MPa.</textarea></div>
+                <div class="ece"><span class="bdg bb" style="font-size:9px;flex-shrink:0">Expected</span><textarea
+                    class="eta" rows="2"
+                    oninput="ar(this)">Increase pressure in 1.4 MPa increments to 27.5 MPa max. If collar does not open, bleed off, notify engineering, and assess contingency before re-attempt or workover.</textarea>
+                </div>
+              </div>
+              <div class="ec">
+                <div class="ect"><span class="bdg ba" style="font-size:9px;flex-shrink:0">Test</span><textarea
+                    class="eta" rows="1" oninput="ar(this)"
+                    style="font-weight:700">LINERHANGER1 does not set on first pressure attempt.</textarea></div>
+                <div class="ece"><span class="bdg bb" style="font-size:9px;flex-shrink:0">Expected</span><textarea
+                    class="eta" rows="2"
+                    oninput="ar(this)">Verify liner at 1,183m. Rotate and reciprocate string 5 times. Re-attempt. If unsuccessful, pull to surface, inspect Cone OD (156.16mm) and ID (101.6mm) before re-run.</textarea>
+                </div>
+              </div>
+            </div><button class="add-r" onclick="addE()">+ Add edge case</button>
+          </div>
+        </div>
+
+        <!-- PRE-JOB CHECKLIST -->
+        <div class="card" id="s11">
+          <div class="sh"><span class="sh-t">Pre-job checklist</span><span class="sh-t" id="ckct"
+              style="font-size:9px;opacity:.85">0 / 10 checked</span></div>
+          <div id="chkl">
+            <label class="ckr"><input type="checkbox" onchange="uc(this)"><span>Well name, BH, SURF, RIG confirmed in
+                Priority ERP import fields.</span></label>
+            <label class="ckr"><input type="checkbox" onchange="uc(this)"><span>PO/AFE 2025D602 confirmed with Thomas
+                Aiello at Tamarack Valley Energy.</span></label>
+            <label class="ckr"><input type="checkbox" onchange="uc(this)"><span>BOM for Item 3 (ITC 2-Stage Hydraulic
+                Cementing Collar) created & approved in Priority.</span></label>
+            <label class="ckr"><input type="checkbox" onchange="uc(this)"><span>BOM for Item 5 (ITC Casing Handling Pup
+                Joint) created & approved in Priority.</span></label>
+            <label class="ckr"><input type="checkbox" onchange="uc(this)"><span>LINERHANGER1 (Item 1) operating params
+                verified — Cone OD 156.16mm, Max Hang 44,751 daN.</span></label>
+            <label class="ckr"><input type="checkbox" onchange="uc(this)"><span>Stage 2 collar pressures confirmed —
+                Open 20.69 MPa, Close 10.34 MPa.</span></label>
+            <label class="ckr"><input type="checkbox" onchange="uc(this)"><span>All 9 matched P/Ns pushed to Priority
+                ERP — job order raised against Q-7461.</span></label>
+            <label class="ckr"><input type="checkbox" onchange="uc(this)"><span>ITC Fluted Stand-Off Band (Item 10,
+                optional) — confirmed needed or excluded.</span></label>
+            <label class="ckr"><input type="checkbox" onchange="uc(this)"><span>Jason Chow sign-off and Thomas Aiello
+                (TVE) approval received before mobilisation.</span></label>
+            <label class="ckr"><input type="checkbox" onchange="uc(this)"><span>PDF exported to Import Tool template and
+                shared with Tamarack Valley Energy.</span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ftr">
+      <div style="display:flex;align-items:center;gap:16px;font-size:11px">
+        <div style="display:flex;align-items:center;gap:7px;font-weight:700;color:var(--grn)">
+          <div style="width:8px;height:8px;background:var(--grn);border-radius:50%"></div>88% complete
+        </div>
+        <div style="display:flex;align-items:center;gap:7px;font-weight:700;color:var(--red)">
+          <div style="width:8px;height:8px;background:var(--red);border-radius:50%"></div>2 BOM items pending
+        </div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-pri-o sm" onclick="go('bom')">Configure BOM →</button>
+        <button class="btn btn-pri sm" onclick="go('export')"><img
+            src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+            alt="Priority" style="height:14px; width:auto; margin-right:6px">Push to ERP →</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══ BOM ══ -->
+  <div id="s-bom" class="scr">
+    <div class="pri-banner" style="border-radius:var(--rad)">
+      <div
+        style="background:white; padding:8px 14px; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; border:1px solid var(--pri-md)">
+        <img
+          src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+          alt="Priority" style="height:32px; width:auto">
+      </div>
+      <div style="flex:1">
+        <div style="font-size:15px;font-weight:800" class="banner-text-h">Priority Software — BOM Configuration</div>
+        <div style="font-size:11px;margin-top:2px" class="banner-text-p">Configure Bill of Materials for Items 3 & 5 ·
+          Quote 7461 · TVE 16-9 HZ 103 CANAL</div>
+      </div>
+      <div style="display:flex;gap:8px;flex-shrink:0">
+        <button class="btn sm"
+          style="background:#F3F4F6;color:var(--t2);border-color:#D1D5DB;border-radius:22px">priority-software.com
+          ↗</button>
+        <button class="btn btn-pri-filled sm" style="border-radius:22px;font-weight:800"
+          onclick="sendPrompt('Push all Q-7461 BOM items to Priority ERP')">Push All to ERP →</button>
+      </div>
+    </div>
+    <div style="display:flex;flex:1;overflow:hidden">
+      <div
+        style="width:295px;background:var(--s1);border-right:1px solid var(--bd);overflow-y:auto;flex-shrink:0;padding:14px">
+        <div style="font-size:9px;font-weight:800;color:var(--t3);letter-spacing:.12em;margin-bottom:9px">ALL PARTS —
+          Q-7461</div>
+        <div id="avail-list" style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">
+          <!-- 1 -->
+          <div class="bom-item avail" onclick="selB('ok')"
+            style="background:white;padding:10px 12px;display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-size:12px;font-weight:800;color:var(--navy)">LINERHANGER1</div>
+              <div style="font-size:10px;color:var(--t3);margin-top:2px">BOT CMC Dual Cone Liner Hanger</div>
+              <div style="font-size:10px;font-weight:700;color:var(--t2);margin-top:1px">$9,975</div>
+            </div>
+            <span class="bdg bg xsm">In ERP</span>
+          </div>
+          <!-- 2 -->
+          <div class="bom-item avail" onclick="selB('ok')"
+            style="background:white;padding:10px 12px;display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-size:12px;font-weight:800;color:var(--navy)">MRLINER</div>
+              <div style="font-size:10px;color:var(--t3);margin-top:2px">ITC MR Setting Collar & 3.0m PBR</div>
+              <div style="font-size:10px;font-weight:700;color:var(--t2);margin-top:1px">$9,684</div>
+            </div>
+            <span class="bdg bg xsm">In ERP</span>
+          </div>
+          <!-- 3 -->
+          <div class="bom-item avail" onclick="selB('ok')"
+            style="background:white;padding:10px 12px;display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-size:12px;font-weight:800;color:var(--navy)">ITCLINER</div>
+              <div style="font-size:10px;color:var(--t3);margin-top:2px">ITC External Casing Packer 3m</div>
+              <div style="font-size:10px;font-weight:700;color:var(--t2);margin-top:1px">$18,150</div>
+            </div>
+            <span class="bdg bg xsm">In ERP</span>
+          </div>
+          <!-- 4 -->
+          <div class="bom-item avail" onclick="selB('ok')"
+            style="background:white;padding:10px 12px;display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-size:12px;font-weight:800;color:var(--navy)">ITCStack114</div>
+              <div style="font-size:10px;color:var(--t3);margin-top:2px">ITC Type 1 Liner Wiper Plug</div>
+              <div style="font-size:10px;font-weight:700;color:var(--t2);margin-top:1px">$3,198</div>
+            </div>
+            <span class="bdg bg xsm">In ERP</span>
+          </div>
+          <!-- 5 -->
+          <div class="bom-item avail" onclick="selB('ok')"
+            style="background:white;padding:10px 12px;display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-size:12px;font-weight:800;color:var(--navy)">IMP-FV-453</div>
+              <div style="font-size:10px;color:var(--t3);margin-top:2px">ITC Float/Landing Collar</div>
+              <div style="font-size:10px;font-weight:700;color:var(--t2);margin-top:1px">$1,475</div>
+            </div>
+            <span class="bdg bg xsm">In ERP</span>
+          </div>
+          <!-- 6 -->
+          <div class="bom-item avail" onclick="selB('ok')"
+            style="background:white;padding:10px 12px;display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-size:12px;font-weight:800;color:var(--navy)">RUNNINGTOOL</div>
+              <div style="font-size:10px;color:var(--t3);margin-top:2px">ITC Mechanical Liner Running Tool</div>
+              <div style="font-size:10px;font-weight:700;color:var(--t2);margin-top:1px">$2,575</div>
+            </div>
+            <span class="bdg bg xsm">In ERP</span>
+          </div>
+          <!-- 7 -->
+          <div class="bom-item avail" onclick="selB('ok')"
+            style="background:white;padding:10px 12px;display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-size:12px;font-weight:800;color:var(--navy)">LFTNIPPLE</div>
+              <div style="font-size:10px;color:var(--t3);margin-top:2px">ITC Liner Float Nipple</div>
+              <div style="font-size:10px;font-weight:700;color:var(--t2);margin-top:1px">$1,100</div>
+            </div>
+            <span class="bdg bg xsm">In ERP</span>
+          </div>
+          <!-- 8 -->
+          <div class="bom-item avail" onclick="selB('ok')"
+            style="background:white;padding:10px 12px;display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-size:12px;font-weight:800;color:var(--navy)">PBRPACKOFFBUSH</div>
+              <div style="font-size:10px;color:var(--t3);margin-top:2px">ITC PBR Pack-off Bushing</div>
+              <div style="font-size:10px;font-weight:700;color:var(--t2);margin-top:1px">$3,450</div>
+            </div>
+            <span class="bdg bg xsm">In ERP</span>
+          </div>
+          <!-- 9 -->
+          <div class="bom-item avail" onclick="selB('ok')"
+            style="background:white;padding:10px 12px;display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-size:12px;font-weight:800;color:var(--navy)">PBRTIEBACKEXT</div>
+              <div style="font-size:10px;color:var(--t3);margin-top:2px">ITC PBR Tie-back Extension</div>
+              <div style="font-size:10px;font-weight:700;color:var(--t2);margin-top:1px">$4,200</div>
+            </div>
+            <span class="bdg bg xsm">In ERP</span>
+          </div>
+        </div>
+
+        <div
+          style="font-size:10px;font-weight:700;color:var(--red);margin:13px 0 6px;display:flex;align-items:center;gap:5px">
+          <div style="width:8px;height:8px;background:var(--red);border-radius:50%"></div>BOM Required (2 parts)
+        </div>
+        <div class="bom-item miss sel" id="bi3" onclick="selB('b3')">
+          <div style="flex:1">
+            <div style="font-size:11px;font-weight:800;color:var(--red)">Item 3 — NO P/N</div>
+            <div style="font-size:10px;color:var(--t2)">ITC 2 Stage Hydraulic Cementing Collar</div>
+            <div style="font-size:9px;font-weight:700;color:var(--pri);margin-top:2px">Configuring now →</div>
+          </div>
+          <span class="bdg br2" style="font-size:9px">BOM Needed</span>
+        </div>
+        <div class="bom-item miss" id="bi5" onclick="selB('b5')">
+          <div style="flex:1">
+            <div style="font-size:11px;font-weight:800;color:var(--red)">Item 5 — NO P/N</div>
+            <div style="font-size:10px;color:var(--t2)">ITC Casing Handling Pup Joint</div>
+            <div style="font-size:9px;font-weight:700;color:var(--pri);margin-top:2px">Click to configure</div>
+          </div>
+          <span class="bdg br2" style="font-size:9px">BOM Needed</span>
+        </div>
+      </div>
+
+      <div style="flex:1;overflow-y:auto;padding:20px;background:var(--bg)">
+
+        <!-- ITEM 3 BOM -->
+        <div id="bom-b3" class="fa">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px">
+            <div
+              style="background:white; border:1px solid var(--pri-md); padding:8px 12px; border-radius:10px; flex-shrink:0">
+              <img
+                src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                alt="Priority" style="height:25px; width:auto">
+            </div>
+            <div>
+              <div style="font-size:16px;font-weight:800;color:var(--navy)">BOM — Item 3</div>
+              <div style="font-size:11px;color:var(--t2)">ITC 2 Stage Hydraulic Cementing Collar · 103.42 MPa HSN Seals
+                · Not in catalogue</div>
+            </div>
+            <span class="bdg br2" style="margin-left:auto">BOM Required</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+            <div class="card">
+              <div class="sh sh-pri"><span class="sh-t">Part identification</span></div>
+              <div class="cb">
+                <div class="g2">
+                  <div class="fld">
+                    <div class="flb">Proposed P/N</div><input class="fi" value="ITC-2SHC-114-P110"
+                      style="font-family:monospace;font-weight:700;color:var(--pri)">
+                    <div style="font-size:9px;color:var(--pri);margin-top:2px;font-weight:700">✦ Confirm with Priority
+                      admin</div>
+                  </div>
+                  <div class="fld">
+                    <div class="flb">Size</div><input class="fi" value="114.3 mm">
+                  </div>
+                  <div class="fld">
+                    <div class="flb">Grade</div><input class="fi" value="P-110">
+                  </div>
+                  <div class="fld">
+                    <div class="flb">Threads</div><input class="fi" value="LT&C">
+                  </div>
+                  <div class="fld">
+                    <div class="flb">Unit cost</div><input class="fi" value="$10,676.00">
+                  </div>
+                  <div class="fld">
+                    <div class="flb">Supplier</div><input class="fi" value="Import Tool Corporation Ltd.">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="sh sh-nv"><span class="sh-t">Operating parameters (from Q-7461)</span></div>
+              <div class="cb">
+                <div class="g2">
+                  <div class="fld">
+                    <div class="flb">Length</div><input class="fi" value="0.69 m">
+                  </div>
+                  <div class="fld">
+                    <div class="flb">OD</div><input class="fi" value="141.27 mm">
+                  </div>
+                  <div class="fld">
+                    <div class="flb">Drillout ID</div><input class="fi" value="100.33 mm">
+                  </div>
+                  <div class="fld">
+                    <div class="flb">Opening press.</div><input class="fi" value="20.69 MPa">
+                  </div>
+                  <div class="fld">
+                    <div class="flb">Closing press.</div><input class="fi" value="10.34 MPa">
+                  </div>
+                  <div class="fld">
+                    <div class="flb">Open seat ID</div><input class="fi" value="63.5 mm">
+                  </div>
+                  <div class="fld">
+                    <div class="flb">Close seat ID</div><input class="fi" value="79.38 mm">
+                  </div>
+                  <div class="fld">
+                    <div class="flb">Port size</div><input class="fi" value="4 × 25.40 mm">
+                  </div>
+                  <div class="fld">
+                    <div class="flb">Burst</div><input class="fi" value="110.76 MPa">
+                  </div>
+                  <div class="fld">
+                    <div class="flb">Collapse</div><input class="fi" value="102.25 MPa">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="margin-bottom:14px">
+            <div class="sh sh-pri"><span class="sh-t">BOM child components</span><button class="btn sm"
+                style="background:rgba(255,255,255,.2);color:white;border-color:rgba(255,255,255,.3);border-radius:14px" onclick="addBomRow(this)">+
+                Add component</button></div>
+            <table class="tbl">
+              <thead>
+                <tr>
+                  <th>Component P/N</th>
+                  <th>Description</th>
+                  <th>Qty</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="pn">TOOL1</span></td>
+                  <td><input class="ti" value="P-110 114.3mm collar body tube"></td>
+                  <td><input class="ti" value="1" style="width:40px;text-align:center"></td>
+                  <td><span class="bdg bp" style="font-size:9px"><img
+                        src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                        style="height:11px;width:auto;margin-right:4px">In ERP</span></td>
+                  <td><button onclick="this.closest('tr').remove()" style="background:none;border:none;cursor:pointer;color:#B0C4D8;font-size:13px">×</button>
+                  </td>
+                </tr>
+                <tr style="background:var(--s2)">
+                  <td><span class="pn">TOOL2</span></td>
+                  <td><input class="ti" value="Stage ports assembly 4 × 25.4mm" style="background:transparent"></td>
+                  <td><input class="ti" value="1" style="width:40px;text-align:center;background:transparent"></td>
+                  <td><span class="bdg bp" style="font-size:9px"><img
+                        src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                        style="height:11px;width:auto;margin-right:4px">In ERP</span></td>
+                  <td><button onclick="this.closest('tr').remove()" style="background:none;border:none;cursor:pointer;color:#B0C4D8;font-size:13px">×</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="pn-miss">NEW</span></td>
+                  <td><input class="ti" value="HSN Seals 103.42 MPa — 2-stage set"></td>
+                  <td><input class="ti" value="2" style="width:40px;text-align:center"></td>
+                  <td><span class="bdg ba" style="font-size:9px">Add to ERP</span></td>
+                  <td><button onclick="this.closest('tr').remove()" style="background:none;border:none;cursor:pointer;color:#B0C4D8;font-size:13px">×</button>
+                  </td>
+                </tr>
+                <tr style="background:var(--s2)">
+                  <td><span class="pn-miss">NEW</span></td>
+                  <td><input class="ti" value="First stage sealing plug, shut-off baffle & closing plug set"
+                      style="background:transparent"></td>
+                  <td><input class="ti" value="1" style="width:40px;text-align:center;background:transparent"></td>
+                  <td><span class="bdg ba" style="font-size:9px">Add to ERP</span></td>
+                  <td><button onclick="this.closest('tr').remove()" style="background:none;border:none;cursor:pointer;color:#B0C4D8;font-size:13px">×</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="display:flex;gap:10px">
+            <button class="btn btn-pri" style="flex:2;justify-content:center;padding:11px"
+              onclick="sendPrompt('Push BOM for ITC 2 Stage Hydraulic Cementing Collar Q-7461 Item 3 to Priority ERP with proposed P/N ITC-2SHC-114-P110. Operating params: OD 141.27mm, Open 20.69 MPa, Close 10.34 MPa, Burst 110.76 MPa')">
+              <img
+                src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                alt="Priority" style="height:14px; width:auto; margin-right:8px">
+              Push BOM to ERP
+            </button>
+            <button class="btn btn-org-o" onclick="selB('b5')">Next: Item 5 →</button>
+            <button class="btn sm" onclick="go('pack')">← Back</button>
+          </div>
+        </div>
+
+        <!-- ITEM 5 BOM -->
+        <div id="bom-b5" style="display:none" class="fa">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px">
+            <div
+              style="background:white; border:1px solid var(--pri-md); padding:8px 14px; border-radius:10px; flex-shrink:0; display:flex; align-items:center; justify-content:center">
+              <img
+                src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                alt="Priority" style="height:25px; width:auto">
+            </div>
+            <div>
+              <div style="font-size:16px;font-weight:800;color:var(--navy)">BOM — Item 5</div>
+              <div style="font-size:11px;color:var(--t2)">ITC Casing Handling Pup Joint · P-110 · LT&C · Not in Priority
+                catalogue</div>
+            </div>
+            <span class="bdg br2" style="margin-left:auto">BOM Required</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+            <div class="card">
+              <div class="sh sh-pri"><span class="sh-t">Part identification</span></div>
+              <div class="cb">
+                <div class="g2">
+                  <div class="fld">
+                    <div class="flb">Proposed P/N</div><input class="fi" value="ITC-CHPJ-114-P110"
+                      style="font-family:monospace;font-weight:700;color:var(--pri)">
+                    <div style="font-size:9px;color:var(--pri);margin-top:2px;font-weight:700">✦ Confirm with Priority
+                      admin</div>
+                  </div>
+                  <div class="fld">
+                    <div class="flb">Description</div><input class="fi"
+                      value="ITC Casing Handling Pup Joint 114.3mm P-110">
+                  </div>
+                  <div class="fld">
+                    <div class="flb">Size</div><input class="fi" value="114.3 mm">
+                  </div>
+                  <div class="fld">
+                    <div class="flb">Grade</div><input class="fi" value="P-110">
+                  </div>
+                  <div class="fld">
+                    <div class="flb">Threads</div><input class="fi" value="LT&C">
+                  </div>
+                  <div class="fld">
+                    <div class="flb">Unit cost</div><input class="fi" value="$1,010.00">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="sh sh-nv"><span class="sh-t">Operating parameters (from Q-7461)</span></div>
+              <div class="cb">
+                <div class="g2">
+                  <div class="fld">
+                    <div class="flb">Length</div><input class="fi" value="3.00 m">
+                  </div>
+                  <div class="fld">
+                    <div class="flb">OD</div><input class="fi" value="114.30 mm">
+                  </div>
+                  <div class="fld">
+                    <div class="flb">ID</div><input class="fi" value="100.33 mm">
+                  </div>
+                  <div class="fld">
+                    <div class="flb">Yield Str.</div><input class="fi" value="758 MPa">
+                  </div>
+                  <div class="fld">
+                    <div class="flb">Burst</div><input class="fi" value="110.76 MPa">
+                  </div>
+                  <div class="fld">
+                    <div class="flb">Collapse</div><input class="fi" value="102.25 MPa">
+                  </div>
+                  <div class="fld">
+                    <div class="flb">Weight</div><input class="fi" value="17.26 kg/m">
+                  </div>
+                  <div class="fld">
+                    <div class="flb">Tensile Str.</div><input class="fi" value="901 MPa">
+                  </div>
+                  <div class="fld">
+                    <div class="flb">Tool Joint OD</div><input class="fi" value="127.00 mm">
+                  </div>
+                  <div class="fld">
+                    <div class="flb">Drift</div><input class="fi" value="98.42 mm">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="margin-bottom:14px">
+            <div class="sh sh-nv"><span class="sh-t">BOM child components</span><button class="btn sm"
+                style="background:rgba(255,255,255,.2);color:white;border-color:rgba(255,255,255,.3);border-radius:14px" onclick="addBomRow(this)">+
+                Add component</button></div>
+            <table class="tbl">
+              <thead>
+                <tr>
+                  <th>Component P/N</th>
+                  <th>Description</th>
+                  <th>Qty</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="pn">CMAT1</span></td>
+                  <td><input class="ti" value="P-110 114.3mm pup joint tube (short body)"></td>
+                  <td><input class="ti" value="1" style="width:40px;text-align:center"></td>
+                  <td><span class="bdg bp" style="font-size:9px"><img
+                        src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                        style="height:11px;width:auto;margin-right:4px">In ERP</span></td>
+                  <td><button onclick="this.closest('tr').remove()" style="background:none;border:none;cursor:pointer;color:#B0C4D8;font-size:13px">×</button>
+                  </td>
+                </tr>
+                <tr style="background:var(--s2)">
+                  <td><span class="pn">CMAT2</span></td>
+                  <td><input class="ti" value="LT&C thread connections (box × pin)" style="background:transparent"></td>
+                  <td><input class="ti" value="2" style="width:40px;text-align:center;background:transparent"></td>
+                  <td><span class="bdg bp" style="font-size:9px"><img
+                        src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                        style="height:11px;width:auto;margin-right:4px">In ERP</span></td>
+                  <td><button onclick="this.closest('tr').remove()" style="background:none;border:none;cursor:pointer;color:#B0C4D8;font-size:13px">×</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="display:flex;gap:10px">
+            <button class="btn btn-pri" style="flex:2;justify-content:center;padding:11px"
+              onclick="sendPrompt('Push BOM for ITC Casing Handling Pup Joint Q-7461 Item 5 to Priority ERP with proposed P/N ITC-CHPJ-114-P110. P-110, LT&C, 114.3mm')">
+              <img
+                src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                alt="Priority" style="height:14px; width:auto; margin-right:8px">
+              Push BOM to ERP
+            </button>
+            <button class="btn btn-org sm" onclick="go('export')">All done — Export →</button>
+            <button class="btn sm" onclick="go('pack')">← Back</button>
+          </div>
+        </div>
+
+        <!-- IN ERP PANEL -->
+        <div id="bom-ok" style="display:none" class="fa">
+          <div style="padding:32px;text-align:center">
+            <div
+              style="width:60px;height:60px;background:var(--grn-lt);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;border:2px solid var(--grn-bd)">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <path d="M5 14l7 7 11-11" stroke="var(--grn)" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div style="font-size:15px;font-weight:800;color:var(--grn);margin-bottom:12px">9 parts confirmed in
+              Priority ERP</div>
+            <div
+              style="font-size:12px;color:var(--t2);line-height:1.8;text-align:center;max-width:560px;margin:0 auto 24px">
+              LINERHANGER1 · MRLINER · ITCLINER · ITCStack114.3 · IMP-FV-453<br>
+              RUNNINGTOOL · LFTNIPPLE · PBRPACKOFFBUSH · PBRTIEBACKEXT<br>
+              <span style="font-weight:700;color:var(--grn)">All 9 parts matched and verified in Priority ERP
+                catalogue.</span>
+            </div>
+            <button class="btn btn-pri sm" onclick="selB('b3')">← Configure BOM items (Items 3 & 5)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══ EXPORT ══ -->
+  <div id="s-export" class="scr">
+
+    <!-- PRIORITY CONNECT BANNER — TOP -->
+    <div class="pri-banner" style="border-radius:var(--rad)">
+      <div
+        style="background:white; padding:8px 14px; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; border:1px solid var(--pri-md)">
+        <img
+          src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+          alt="Priority" style="height:32px; width:auto">
+      </div>
+      <div style="flex:1">
+        <div style="font-size:15px;font-weight:800" class="banner-text-h">Connect with Priority Software ERP</div>
+        <div style="font-size:11px;margin-top:2px" class="banner-text-p">Push job pack, all P/Ns, and BOM directly into
+          Priority — the all-in-one ERP for manufacturing & distribution</div>
+      </div>
+      <div style="display:flex;gap:8px;flex-shrink:0">
+        <button class="btn sm" style="background:#F3F4F6;color:var(--t2);border-color:#D1D5DB;border-radius:22px"
+          onclick="go('bom')">⚠ 2 BOM pending</button>
+        <button class="btn btn-pri-filled sm" style="border-radius:22px;font-weight:800"
+          onclick="sendPrompt('Push Q-7461 complete job pack to Priority ERP')">Push All to ERP →</button>
+      </div>
+    </div>
+
+    <div class="pb">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px">
+        <div>
+          <div style="font-size:20px;font-weight:800;color:var(--navy)">Export job pack</div>
+          <div style="font-size:12px;color:var(--t2);margin-top:3px">TVE 16-9 HZ 103 CANAL — Quote 7461 — Tamarack
+            Valley Energy</div>
+        </div>
+        <button class="btn sm" onclick="go('pack')">← Back to edit</button>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 295px;gap:14px;align-items:start">
+        <div>
+          <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px">
+            <div class="sc sc-pri">
+              <div class="sc-v">9/11</div>
+              <div class="sc-l">P/Ns IN PRIORITY</div>
+              <div class="sc-s">Matched & verified</div>
+            </div>
+            <div class="sc" style="border-top-color:var(--red)">
+              <div class="sc-v" style="color:var(--red)">2</div>
+              <div class="sc-l">BOM PENDING</div>
+              <div class="sc-s">Items 3 & 5</div>
+            </div>
+            <div class="sc">
+              <div class="sc-v">$64,887</div>
+              <div class="sc-l">QUOTE TOTAL</div>
+              <div class="sc-s">Excl. per-day items</div>
+            </div>
+            <div class="sc" style="border-top-color:var(--grn)">
+              <div class="sc-v" style="color:var(--grn)">88%</div>
+              <div class="sc-l">COMPLETENESS</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="sh"><span class="sh-t">Export options</span><span class="sh-t"
+                style="font-size:9px;opacity:.8">PDF template first · Priority ERP second</span></div>
+            <div class="cb">
+
+              <!-- 1st: PUSH TO PRIORITY -->
+              <div class="fmt sel-pri" id="fpri" onclick="pf(this,'priority')" style="position:relative">
+                <div class="fnm fnm-pri">1st</div>
+                <div class="fic" style="background:white;border:1.5px solid var(--pri-md)">
+                  <img
+                    src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                    alt="Priority" style="max-width:90%; height:auto">
+                </div>
+                <div style="flex:1">
+                  <div style="font-size:13px;font-weight:800;color:var(--navy)">Push to Priority ERP</div>
+                  <div style="font-size:11px;color:var(--t2);margin-top:2px">Sync job pack, all 11 items, P/Ns, and BOM
+                    directly into Priority Software</div>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px"><span
+                    class="bdg bp">Priority Sync</span><span style="font-size:9px;font-weight:700;color:var(--red)">▲ 2
+                    BOM pending</span></div>
+              </div>
+
+              <!-- 2nd: EXPORT PDF -->
+              <div class="fmt" id="fpdf" onclick="pf(this,'pdf')" style="position:relative">
+                <div class="fnm fnm-def">2nd</div>
+                <div class="fic" style="background:var(--org-lt);border:1.5px solid var(--org-md);color:var(--org)"><svg
+                    width="20" height="20" viewBox="0 0 18 18" fill="none">
+                    <rect x="2" y="1" width="11" height="16" rx="2" fill="currentColor" opacity=".3" />
+                    <rect x="10" y="3" width="7" height="13" rx="2" fill="currentColor" opacity=".7" />
+                    <path d="M5 7h5M5 10h3" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" />
+                  </svg></div>
+                <div style="flex:1">
+                  <div style="font-size:13px;font-weight:800;color:var(--navy)">Export to PDF — Import Tool template
+                  </div>
+                  <div style="font-size:11px;color:var(--t2);margin-top:2px">Liner / Stage Tool Program · ITC orange
+                    headers · All 11 items · Quote 7461</div>
+                </div>
+                <span class="bdg bg">Recommended</span>
+              </div>
+
+              <!-- 3rd: WORD -->
+              <div class="fmt" id="fword" onclick="pf(this,'word')" style="position:relative">
+                <div class="fnm fnm-def">3rd</div>
+                <div class="fic"
+                  style="background:var(--teal-lt);border:1.5px solid var(--teal-md);color:var(--teal);font-size:14px;font-weight:800">
+                  W</div>
+                <div style="flex:1">
+                  <div style="font-size:12px;font-weight:800;color:var(--navy)">Word document (.docx)</div>
+                  <div style="font-size:11px;color:var(--t2);margin-top:2px">Formatted · editable · print-ready</div>
+                </div>
+              </div>
+
+              <!-- 4th: ZOHO -->
+              <div class="fmt" id="fzoho" onclick="pf(this,'zoho')" style="position:relative">
+                <div class="fnm fnm-def">4th</div>
+                <div class="fic"
+                  style="background:var(--grn-lt);border:1.5px solid var(--grn-bd);color:var(--grn);font-size:14px;font-weight:800">
+                  Z</div>
+                <div style="flex:1">
+                  <div style="font-size:12px;font-weight:800;color:var(--navy)">Zoho CRM / Projects</div>
+                  <div style="font-size:11px;color:var(--t2);margin-top:2px">Push to your Zoho project board</div>
+                </div>
+              </div>
+
+              <!-- 5th: EMAIL -->
+              <div class="fmt" id="femail" onclick="pf(this,'email')" style="position:relative">
+                <div class="fnm fnm-def">5th</div>
+                <div class="fic"
+                  style="background:var(--org-lt);border:1.5px solid var(--org-md);color:var(--org-dk);font-size:14px;font-weight:800">
+                  @</div>
+                <div style="flex:1">
+                  <div style="font-size:12px;font-weight:800;color:var(--navy)">Email to customer</div>
+                  <div style="font-size:11px;color:var(--t2);margin-top:2px">Draft in Gmail — Thomas Aiello · Tamarack
+                    Valley Energy</div>
+                </div>
+              </div>
+
+              <button id="exbtn" class="btn btn-org"
+                style="width:100%;margin-top:14px;padding:12px;font-size:13px;justify-content:center;border-radius:25px"
+                onclick="doExport()">
+                <span style="display:flex;align-items:center;justify-content:center;gap:8px"><div style="background:white;padding:3px 6px;border-radius:5px;display:flex;align-items:center;justify-content:center;margin-right:8px"><img src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg" alt="Priority" style="height:14px; width:auto"></div>Push to Priority ERP →</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div class="card">
+            <div class="sh sh-pri"><span class="sh-t">Priority ERP fields — Q-7461</span></div>
+            <div class="cb">
+              <table class="tbl" style="margin-bottom:12px">
+                <tbody>
+                  <tr>
+                    <td style="font-weight:700">Well name (key)</td>
+                    <td style="text-align:right;font-size:10px;font-weight:700;color:var(--pri)">TVE 16-9 HZ 103
+                      CANAL...</td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight:700">BH</td>
+                    <td style="text-align:right;font-size:10px">103/13-15-70-23-W4</td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight:700">SURF</td>
+                    <td style="text-align:right;font-size:10px">16-9-70-23-W4</td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight:700">RIG</td>
+                    <td style="text-align:right;font-size:10px;color:var(--t3)">— (empty)</td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight:700">P/Ns matched</td>
+                    <td style="text-align:right"><span class="bdg bp xsm"><img
+                          src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                          style="height:11px;width:auto;margin-right:4px">9 of 11</span></td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight:700">BOM pending</td>
+                    <td style="text-align:right"><span class="bdg br2 xsm">Items 3 & 5</span></td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight:700">Quote total</td>
+                    <td style="text-align:right;font-weight:800;color:var(--org)">$64,887.85</td>
+                  </tr>
+                </tbody>
+              </table>
+              <button class="btn btn-org" style="width:100%;justify-content:center" onclick="go('bom')">
+                <div
+                  style="background:white;padding:3px 6px;border-radius:5px;display:flex;align-items:center;justify-content:center;margin-right:8px">
+                  <img
+                    src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg"
+                    alt="Priority" style="height:14px; width:auto">
+                </div>
+                Push to Priority ERP
+              </button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="sh"><span class="sh-t">PDF template preview</span></div>
+            <div class="cb">
+              <div style="border:1px solid var(--bd);border-radius:6px;overflow:hidden">
+                <div style="background:var(--org);padding:4px 7px;display:flex;justify-content:space-between"><span
+                    style="color:white;font-weight:800;font-size:9px">IMPORT TOOL CORPORATION LTD.</span><span
+                    style="color:white;font-size:9px">LINER / STAGE TOOL</span></div>
+                <div style="background:white;padding:5px 7px">
+                  <div style="font-weight:800;font-size:10px;color:#111">TAMARACK VALLEY ENERGY</div>
+                  <div style="font-size:9px;color:#555">Liner / Stage Tool Program</div>
+                </div>
+                <div style="background:white;margin:0 6px;border:1px solid #ddd;overflow:hidden;margin-bottom:4px">
+                  <div style="display:grid;grid-template-columns:52px 1fr 52px 1fr;font-size:8px">
+                    <div
+                      style="padding:2px 4px;background:#f0f2f5;font-weight:700;border-right:1px solid #ddd;border-bottom:1px solid #ddd;color:#333">
+                      Attn</div>
+                    <div style="padding:2px 4px;border-right:1px solid #ddd;border-bottom:1px solid #ddd;color:#333">
+                      Thomas Aiello</div>
+                    <div
+                      style="padding:2px 4px;background:#f0f2f5;font-weight:700;border-right:1px solid #ddd;border-bottom:1px solid #ddd;color:#333">
+                      Sales</div>
+                    <div style="padding:2px 4px;border-bottom:1px solid #ddd;color:#333">Jason Chow</div>
+                    <div
+                      style="padding:2px 4px;background:#f0f2f5;font-weight:700;border-right:1px solid #ddd;border-bottom:1px solid #ddd;color:#333">
+                      Well</div>
+                    <div style="padding:2px 4px;border-right:1px solid #ddd;border-bottom:1px solid #ddd;color:#333">TVE
+                      16-9 HZ...</div>
+                    <div
+                      style="padding:2px 4px;background:#f0f2f5;font-weight:700;border-right:1px solid #ddd;border-bottom:1px solid #ddd;color:#333">
+                      Quote</div>
+                    <div style="padding:2px 4px;border-bottom:1px solid #ddd;color:#333">7461</div>
+                    <div
+                      style="padding:2px 4px;background:#f0f2f5;font-weight:700;border-right:1px solid #ddd;color:#333">
+                      SURF</div>
+                    <div style="padding:2px 4px;border-right:1px solid #ddd;color:#333">16-9-70-23-W4</div>
+                    <div
+                      style="padding:2px 4px;background:#f0f2f5;font-weight:700;border-right:1px solid #ddd;color:#333">
+                      BH</div>
+                    <div style="padding:2px 4px;color:#333">103/13-15-...</div>
+                  </div>
+                </div>
+                <div
+                  style="background:var(--org);padding:2px 7px;margin:0 6px 4px;font-size:8px;font-weight:800;color:white;border-radius:2px">
+                  Casing information</div>
+                <div style="font-size:7px;color:#555;padding:2px 7px 5px">11 equipment items · Total $64,887.85 · 2
+                  pages</div>
+              </div>
+              <div style="font-size:10px;color:var(--t2);margin-top:8px;text-align:center">All 11 items · ITC orange
+                template · 2 pages</div>
+            </div>
+          </div>
+          <div style="background:var(--navy);border-radius:var(--rad);padding:15px;text-align:center">
+            <div style="font-size:11px;font-weight:800;color:white;margin-bottom:3px">ZOHO PREMIUM PARTNER</div>
+            <div style="font-size:18px;margin-bottom:4px">★★★★★</div>
+            <div style="font-size:10px;color:rgba(255,255,255,.65);margin-bottom:11px">amazingbusinessresults.com</div>
+            <div style="display:flex;gap:7px;justify-content:center">
+              <button class="btn btn-org sm">Book a meeting</button>
+              <button class="btn sm"
+                style="background:rgba(255,255,255,.12);color:white;border-color:rgba(255,255,255,.25);border-radius:22px">Zoho
+                One Free Trial</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+  // ── MOCK ACTIONS ──
+  function sendPrompt(msg) {
+    alert("Simulated ERP Connection:\n" + msg + "\n\n(Action completed in demo mode.)");
+  }
+
+  // ── NAVIGATION ──
+  function go(id, noPush) {
+    document.querySelectorAll('.scr').forEach(s => s.classList.remove('on'));
+    const sc = document.getElementById('s-' + id);
+    if (!sc) return;
+    if (!noPush) window.history.pushState({ id }, '', '#' + id);
+    sc.classList.add('on');
+    // Auto-resize textareas when screen becomes visible
+    sc.querySelectorAll('textarea').forEach(t => ar(t));
+    const nmap = { dash: 0, upload: 1, pack: 2, bom: 3, export: 4 };
+    document.querySelectorAll('.nb').forEach(b => b.classList.remove('on', 'bom-on'));
+    const nb = document.querySelectorAll('.nb');
+    if (id === 'bom') { nb[3]?.classList.add('on', 'bom-on'); }
+    else if (nmap[id] !== undefined) nb[nmap[id]]?.classList.add('on');
+    // Steps bar
+    const steps = { dash: 0, upload: 1, proc: 2, pack: 3, bom: 4, export: 5 };
+    const act = steps[id] || 0;
+    const stepsBar = document.querySelector('.steps');
+    if (stepsBar) {
+      stepsBar.style.display = ['dash', 'list'].includes(id) ? 'none' : 'flex';
+    }
+    for (let i = 1; i <= 6; i++) {
+      const el = document.getElementById('step' + i); if (!el) continue;
+      const n = el.querySelector('.step-n');
+      el.className = 'step' + (i === 5 ? ' step-pri' : '');
+      if (i < act) { el.classList.add('done'); n.innerHTML = '✓'; }
+      else if (i === act) { el.classList.add('active'); }
+      else n.textContent = String(i);
+    }
+  }
+
+  // ── FILE ──
+  function fileChosen(inp) { if (!inp.files[0]) return; document.getElementById('fpn').textContent = inp.files[0].name; document.getElementById('dz').style.opacity = '.6'; document.getElementById('fp').style.display = 'flex'; }
+  function clearFile() { document.getElementById('dz').style.opacity = '1'; document.getElementById('fp').style.display = 'none'; document.getElementById('fi').value = ''; }
+  function doDrop(e) { e.preventDefault(); document.getElementById('dz').classList.remove('over'); if (e.dataTransfer.files[0]) { document.getElementById('fpn').textContent = e.dataTransfer.files[0].name; document.getElementById('dz').style.opacity = '.6'; document.getElementById('fp').style.display = 'flex'; } }
+
+  // ── PROCESSING → AUTO-REDIRECT ──
+  let tmrs = []; let cdT = null;
+  function beginProc() {
+    go('proc'); tmrs.forEach(clearTimeout); tmrs = [];
+    const bar = document.getElementById('pbar'); bar.style.width = '4%'; document.getElementById('pct-t').textContent = '4%';
+    for (let i = 0; i < 6; i++) { const p = document.getElementById('ps' + i); p.className = 'ps' + (i === 0 ? ' run' : ''); p.style.opacity = i === 0 ? '1' : '.4'; document.getElementById('pi' + i).textContent = String(i + 1); }
+    const prog = [18, 36, 52, 68, 84, 100], delay = [300, 1100, 2000, 2800, 3600, 4500];
+    delay.forEach((d, i) => {
+      const t = setTimeout(() => {
+        bar.style.width = prog[i] + '%'; document.getElementById('pct-t').textContent = prog[i] + '%';
+        const p = document.getElementById('ps' + i); p.className = 'ps done'; p.style.opacity = '1';
+        document.getElementById('pi' + i).innerHTML = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5.5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        if (i < 5) { const nx = document.getElementById('ps' + (i + 1)); nx.className = 'ps run'; nx.style.opacity = '1'; document.getElementById('pi' + (i + 1)).innerHTML = '<div class="spin" style="width:12px;height:12px;border:2px solid rgba(232,119,12,.3);border-top-color:var(--org)"></div>'; }
+        if (i === 5) { setTimeout(() => { document.getElementById('pbdg').textContent = 'Complete'; document.getElementById('pbdg').className = 'bdg bg'; document.getElementById('pdone').style.display = 'block'; startCd(); }, 500); }
+      }, d); tmrs.push(t);
+    });
+  }
+  let cdc = 3;
+  function startCd() { cdc = 3; document.getElementById('countdown').textContent = cdc; cdT = setInterval(() => { cdc--; document.getElementById('countdown').textContent = cdc; if (cdc <= 0) { clearInterval(cdT); go('pack'); } }, 1000); }
+  function cancelRedirect() { clearInterval(cdT); go('pack'); }
+
+  // ── SIDEBAR SCROLL ──
+  function scrl(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.scrollY - 200;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+    const ids = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10', 's11'];
+    document.querySelectorAll('.si').forEach((s, i) => s.classList.toggle('on', ids[i] === id));
+  }
+  window.addEventListener('scroll', function () {
+    const ids = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10', 's11'];
+    let cur = 0;
+    ids.forEach((id, i) => {
+      const el = document.getElementById(id);
+      if (el && (el.getBoundingClientRect().top <= 210)) cur = i;
+    });
+    document.querySelectorAll('.si').forEach((s, i) => s.classList.toggle('on', i === cur));
+  });
+
+  // ── FORM HELPERS ──
+  function ar(el) { el.style.height = 'auto'; el.style.height = el.scrollHeight + 'px'; }
+  function ab(lid) { const l = document.getElementById(lid), d = document.createElement('div'); d.className = 'brow'; d.innerHTML = '<div class="bdot"></div><textarea class="bta" rows="2" oninput="ar(this)" placeholder="Type here..."></textarea><button class="xdl" onclick="delrow(this)">×</button>'; l.appendChild(d); const t = d.querySelector('textarea'); t.focus(); ar(t); }
+  function delrow(btn) { btn.closest('.brow')?.remove(); }
+  function dbCr(btn) { btn.closest('.cr')?.remove(); }
+  function addC() { const l = document.getElementById('acl'), d = document.createElement('div'); d.className = 'cr wn'; d.innerHTML = '<div class="cdot" onclick="tc(this)"></div><textarea class="cta" rows="2" oninput="ar(this)" placeholder="[Thing] does [behaviour] when [condition]."></textarea><button class="xdl" onclick="dbCr(this)">×</button>'; l.appendChild(d); d.querySelector('textarea').focus(); }
+  function tc(dot) { const r = dot.closest('.cr'); r.classList.toggle('ok'); r.classList.toggle('wn'); }
+  function addE() { const l = document.getElementById('edgel'), d = document.createElement('div'); d.className = 'ec'; d.innerHTML = '<div class="ect"><span class="bdg ba" style="font-size:9px;flex-shrink:0">Test</span><textarea class="eta" rows="1" oninput="ar(this)" style="font-weight:700" placeholder="Unusual condition..."></textarea></div><div class="ece"><span class="bdg bb" style="font-size:9px;flex-shrink:0">Expected</span><textarea class="eta" rows="2" oninput="ar(this)" placeholder="What should happen..."></textarea></div>'; l.appendChild(d); d.querySelector('textarea').focus(); }
+  function uc(cb) { cb.closest('.ckr').classList.toggle('dk', cb.checked); const all = document.querySelectorAll('#chkl input[type=checkbox]'); const n = [...all].filter(c => c.checked).length; document.getElementById('ckct').textContent = n + ' / ' + all.length + ' checked'; }
+  function addBomRow(btn) {
+    const tb = btn.closest('.card').querySelector('tbody');
+    const tr = document.createElement('tr');
+    if (tb.children.length % 2 === 1) tr.style.background = 'var(--s2)';
+    tr.innerHTML = '<td><span class="pn-miss">NEW</span></td><td><input class="ti" value="Component description" style="background:transparent"></td><td><input class="ti" value="1" style="width:40px;text-align:center;background:transparent"></td><td><span class="bdg ba" style="font-size:9px">Add to ERP</span></td><td><button onclick="this.closest(\'tr\').remove()" style="background:none;border:none;cursor:pointer;color:#B0C4D8;font-size:13px">×</button></td>';
+    tb.appendChild(tr);
+  }
+
+  // ── BOM PANELS ──
+  function selB(id) {
+    ['b3', 'b5', 'ok'].forEach(k => { const el = document.getElementById('bom-' + k); if (el) el.style.display = k === id ? 'block' : 'none'; });
+    ['bi3', 'bi5'].forEach(el => { document.getElementById(el)?.classList.remove('sel'); });
+    if (id === 'b3') document.getElementById('bi3')?.classList.add('sel');
+    if (id === 'b5') document.getElementById('bi5')?.classList.add('sel');
+  }
+
+  // ── EXPORT OPTIONS ──
+  let cf = 'priority';
+  const ep = { priority: 'Push Q-7461 complete job pack to Priority ERP — well name TVE 16-9 HZ 103 CANAL 13-15-70-23-W4, BH 103/13-15-70-23-W4, SURF 16-9-70-23-W4, RIG empty, all 11 items, 9 matched P/Ns, BOM for Items 3 and 5', word: 'Export Q-7461 TVE 16-9 liner stage tool job pack as formatted Word document', zoho: 'Push Q-7461 job pack to Zoho CRM as project task for Tamarack Valley Energy', email: 'Draft email to Thomas Aiello at Tamarack Valley Energy with Q-7461 Liner/Stage Tool job pack attached' };
+  function pf(el, fmt) {
+    document.querySelectorAll('.fmt').forEach(f => { f.classList.remove('sel-pri', 'sel-pdf'); });
+    cf = fmt;
+    if (fmt === 'priority') el.classList.add('sel-pri'); else el.classList.add('sel-pdf');
+    const btn = document.getElementById('exbtn');
+    const L = { priority: 'Push to Priority ERP →', pdf: 'Open PDF — Import Tool template', word: 'Export as Word (.docx) →', zoho: 'Push to Zoho CRM →', email: 'Draft email in Gmail →' };
+    const isPri = fmt === 'priority';
+    btn.style.background = 'var(--org)';
+    btn.style.borderColor = 'var(--org)';
+    btn.style.color = 'white';
+    const priIcon = '<div style="background:white;padding:3px 6px;border-radius:5px;display:flex;align-items:center;justify-content:center;margin-right:8px"><img src="https://cdn-ildofcc.nitrocdn.com/kitdiqlmIRSNEPcfDMXRsJhcusqfcNfZ/assets/images/source/rev-208dc83/www.priority-software.com/wp-content/uploads/2023/02/logo.svg" alt="Priority" style="height:14px; width:auto"></div>';
+    const dlIcon = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v8M4 6l3 3 3-3" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 10v2a1 1 0 001 1h8a1 1 0 001-1v-2" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg>';
+    btn.innerHTML = `<span style="display:flex;align-items:center;justify-content:center;gap:8px">${cf === 'priority' ? priIcon : dlIcon}${L[fmt]}</span>`;
+  }
+  function doExport() { if (cf !== 'pdf') { sendPrompt(ep[cf] || ep.priority); return; } generatePDF(); }
+
+  // ── PDF GENERATION — ALL 11 ITEMS, EXACT Q-7461 FORMAT ──
+  function generatePDF() {
+    if (typeof window.jspdf === 'undefined') { alert('PDF library loading — try again in a moment.'); return; }
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'letter' });
+    const PW = 215.9, PH = 279.4, M = 14, CW = PW - M * 2;
+    const ORG = [232, 119, 12], LG = [242, 242, 242], DK = [26, 26, 26], WH = [255, 255, 255], BD = [180, 180, 180], HG = [235, 235, 235], OL = [254, 243, 232];
+    function chrome(pg, tot) {
+      doc.setFillColor(...ORG); doc.rect(M, 6, CW, 8, 'F');
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(8); doc.setTextColor(...WH);
+      doc.text('IMPORT TOOL CORPORATION LTD.', M + 3, 10.5); doc.text('LINER / STAGE TOOL PROGRAM', PW - M - 3, 10.5, { align: 'right' });
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(6.5);
+      doc.text('First in Service, First in Quality Tools  |  www.importtool.com  |  Certified ISO 9001:2015', M + 3, 13.5);
+      doc.text(`PAGE ${pg} OF ${tot}`, PW - M - 3, 13.5, { align: 'right' });
+      doc.setFillColor(...LG); doc.rect(M, PH - 11, CW, 6, 'F');
+      doc.setFontSize(6); doc.setTextColor(130, 130, 130);
+      doc.text('CALGARY, AB: 403.261.3032  |  EDMONTON, AB: 780.434.6406  |  ESTEVAN, SK: 306.634.2511  |  PARADISE, NL: 709.748.4990', PW / 2, PH - 7.5, { align: 'center' });
+      doc.setFontSize(5.5); doc.text('Generated by JobPack AI · Priority ERP Integrated', PW / 2, PH - 4, { align: 'center' });
+    }
+    function sh(txt, y) { doc.setFillColor(...ORG); doc.rect(M, y, CW, 6, 'F'); doc.setFont('helvetica', 'bold'); doc.setFontSize(8); doc.setTextColor(...WH); doc.text(txt, M + 3, y + 4.2); return y + 6; }
+    function tbl(hdrs, rows, cw, y) {
+      doc.setFillColor(...HG); doc.rect(M, y, CW, 6, 'F'); let cx = M;
+      hdrs.forEach((h, i) => { doc.setFont('helvetica', 'bold'); doc.setFontSize(7.5); doc.setTextColor(...DK); doc.text(h, cx + 2, y + 4.2); doc.setDrawColor(...BD); doc.setLineWidth(0.2); doc.rect(cx, y, cw[i], 6, 'S'); cx += cw[i]; }); y += 6;
+      rows.forEach((row, ri) => { const rh = 6; if (ri % 2 === 1) { doc.setFillColor(...LG); doc.rect(M, y, CW, rh, 'F'); } cx = M; row.forEach((c, ci) => { doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); doc.setTextColor(...DK); const ls = doc.splitTextToSize(String(c), cw[ci] - 4); doc.text(ls, cx + 2, y + 4); doc.rect(cx, y, cw[ci], rh, 'S'); cx += cw[ci]; }); y += rh; }); return y;
+    }
+
+    // PAGE 1
+    chrome(1, 2); let y = 22;
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(12); doc.setTextColor(...DK); doc.text('TAMARACK VALLEY ENERGY', M, y); y += 5;
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(9); doc.setTextColor(80, 80, 80); doc.text('LINER / STAGE TOOL PROGRAM', M, y); y += 7;
+
+    // Header table
+    const jcw = [CW * .13, CW * .37, CW * .13, CW * .37];
+    [['ATTENTION', 'THOMAS AIELLO', 'SALES REP', 'JASON CHOW'],
+    ['PHONE', '(587) 438-5621', 'PHONE', '(403) 540-7016'],
+    ['WELL NAME', 'TVE 16-9 HZ 103 CANAL 1...', 'QUOTE NO.', '7461'],
+    ['SURF', '16-9-70-23-W4', 'REV. NO.', '0'],
+    ['BH', '103/13-15-70-23-W4', 'PO/AFE NO.', '2025D602'],
+    ['RIG', '', 'DATE', 'SEPTEMBER 3, 2025']].forEach((row, ri) => {
+      if (ri % 2 === 0) doc.setFillColor(248, 248, 248); else doc.setFillColor(...LG); doc.rect(M, y, CW, 5.5, 'F'); let cx = M;
+      row.forEach((c, ci) => { doc.setFont('helvetica', ci % 2 === 0 ? 'bold' : 'normal'); doc.setFontSize(7.5); doc.setTextColor(...DK); doc.text(c, cx + 2, y + 3.8); doc.setDrawColor(...BD); doc.setLineWidth(0.2); doc.rect(cx, y, jcw[ci], 5.5, 'S'); cx += jcw[ci]; }); y += 5.5;
+    }); y += 6;
+
+    y = sh('CASING INFORMATION', y) + 2;
+    y = tbl(['DESCRIPTION', 'INTERVAL', 'SIZE', 'WEIGHT', 'GRADE', 'THREADS', 'HOLE SIZE'],
+      [['Intermediate Casing', '0 m – 1,204 m', '177.8 mm', '34.23 kg/m', 'J-55', 'LT&C', '222 mm'],
+      ['Liner', '1,183 m – 1,303 m', '114.3 mm', '17.26 kg/m', 'L-80', 'LT&C', '159 mm']],
+      [CW * .22, CW * .14, CW * .1, CW * .12, CW * .09, CW * .17, CW * .16], y) + 2;
+    y = tbl(['OVERLAP', 'LINER LENGTH', 'LINER TOP', 'LINER WEIGHT (IN AIR)'],
+      [['21 m', '120 m', '1,183 m', '2,031.13 daN']],
+      [CW / 4, CW / 4, CW / 4, CW / 4], y) + 6;
+
+    y = sh('WELL INFORMATION', y) + 2;
+    y = tbl(['TD', 'TVD'], [['2,358 mMD', '526 m']], [CW / 2, CW / 2], y) + 6;
+
+    y = sh('LINER EQUIPMENT REQUIRED', y) + 2;
+    const ec = [CW * .045, CW * .040, CW * .120, CW * .070, CW * .38, CW * .070, CW * .070, CW * .105, CW * .100];
+    doc.setFillColor(...HG); doc.rect(M, y, CW, 6, 'F'); let cx2 = M;
+    ['ITEM', 'QTY', 'P/N', 'SIZE', 'DESCRIPTION', 'GRADE', 'THREADS', 'UNIT COST', 'NET AMOUNT'].forEach((h, i) => {
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(7); doc.setTextColor(...DK);
+      doc.text(h, cx2 + 1.5, y + 4.2); doc.setDrawColor(...BD); doc.setLineWidth(0.2); doc.rect(cx2, y, ec[i], 6, 'S'); cx2 += ec[i];
+    }); y += 6;
+
+    // All 11 equipment items from Q-7461
+    const items = [
+      ['1', '1', 'LINERHANGER1', '114.3mm', 'BOT Type CMC Dual Cone Mechanical Set Liner Hanger (P-110, J-55/K-55)', 'P-110', 'LT&C', '$9,975.00', '$9,975.00'],
+      ['2', '1', 'MRLINER', '114.3mm', 'ITC MR Setting Collar & 3.0m PBR Tieback Extension', 'L-80', 'LT&C', '$9,684.10', '$9,684.10'],
+      ['3', '1', 'ITC-2SHC*', '114.3mm', 'ITC 2 Stage Hydraulic Cementing Collar, 103.42 MPa HSN Seals, First Stage Sealing Plug, Shut-Off Baffle & Closing Plug  *BOM pending', 'P-110', 'LT&C', '$10,676.00', '$10,676.00'],
+      ['4', '1', 'ITCLINER', '114.3mm', 'ITC External Casing Packer c/w 3m Element', 'P-110', 'LT&C', '$18,150.00', '$18,150.00'],
+      ['5', '1', 'ITC-CHPJ*', '114.3mm', 'ITC Casing Handling Pup Joint  *BOM pending', 'P-110', 'LT&C', '$1,010.00', '$1,010.00'],
+      ['6', '1', 'ITCLINER', '114.3mm', 'Optional — ITC External Casing Packer c/w 1m Element', 'L-80', 'LT&C', '$14,466.00', '—'],
+      ['7', '1', 'TOOL1', '114.3mm', 'Drill Pipe Pump Down Plug', '—', '—', '$1,985.75', '$1,985.75'],
+      ['8', '1', 'ITCStack114.3', '114.3mm', 'ITC Type 1 Liner Wiper Plug c/w Modified Stage Collar Closing Nose', '—', '—', '$3,198.00', '$3,198.00'],
+      ['9', '1', 'IMP-FV-453', '114.3mm', 'ITC Combination Float/Landing Collar c/w Ball Receiver', 'L-80', 'LT&C', '$1,475.00', '$1,475.00'],
+      ['10', '1', '—', '114.3mm', 'Optional — ITC Fluted Stand-Off Band for 159mm Hole Size', '—', '—', '$23.90', '—'],
+      ['11', '1', 'TOOL2', '114.3mm', 'ITC Threadlock', '—', '—', '$34.00', '$34.00'],
+    ];
+    items.forEach((row, ri) => {
+      const dl = doc.splitTextToSize(row[4], ec[4] - 3);
+      const rh = Math.max(6, dl.length * 4.5 + 2);
+      if (y + rh > PH - 14) { doc.addPage(); chrome(2, 2); y = 22; }
+      const isOpt = row[0] === '6' || row[0] === '10';
+      if (isOpt) { doc.setFillColor(250, 250, 250); } else if (ri % 2 === 1) { doc.setFillColor(...LG); } else { doc.setFillColor(255, 255, 255); }
+      doc.rect(M, y, CW, rh, 'F');
+      cx2 = M; row.forEach((c, ci) => {
+        doc.setFont('helvetica', isOpt ? 'italic' : 'normal'); doc.setFontSize(7.5); doc.setTextColor(...DK);
+        const ls = ci === 4 ? dl : doc.splitTextToSize(String(c), ec[ci] - 3);
+        doc.text(ls, cx2 + 1.5, y + 4); doc.rect(cx2, y, ec[ci], rh, 'S'); cx2 += ec[ci];
+      }); y += rh;
+    }); y += 6;
+
+    if (y > PH - 55) { doc.addPage(); chrome(2, 2); y = 22; }
+    y = sh('SERVICE & RENTALS', y) + 2;
+    y = tbl(
+      ['ITEM', 'DESCRIPTION', 'P/N', 'UNIT', 'UNIT COST', 'NET AMOUNT'],
+      [['12', '114.3mm ITC Mechanical Liner Running Tool', 'RUNNINGTOOL', '/ Job', '$2,575.00', '$2,575.00'],
+      ['13', 'ITC Liner, HD Cement/Plug Release Head/Swivel', 'LFTNIPPLE', '/ Job', '$2,775.00', '$2,775.00'],
+      ['14', '127mm ITC Retrievable PBR Pack-Off Assembly', 'PBRPACKOFFBUSH', '/ Job', '$1,975.00', '$1,975.00'],
+      ['15', 'ITC Drill Pipe Pup Joint c/w Junk Bonnet', 'PBRTIEBACKEXT', '/ Job', '$975.00', '$975.00'],
+      ['16', 'Environmental, Carbon Levy, Health And Safety Fee', '—', '/ Job', '$400.00', '$400.00'],
+      ['17', 'Import Tool Service Operator', '—', '/ Day', '$1,485.00', '—'],
+      ['18', 'Import Tool Subsistence', '—', '/ Day', '$225.00', '—'],
+      ['19', 'Kilometerage — Edmonton to Location and Return', '—', '/ km', '$1.90', '—']],
+      [CW * .055, CW * .40, CW * .21, CW * .09, CW * .115, CW * .13], y) + 2;
+
+    doc.setFillColor(...ORG); doc.rect(M, y, CW, 7, 'F');
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(9); doc.setTextColor(...WH);
+    doc.text('TOTAL', PW - M - 52, y + 4.8); doc.text('$64,887.85', PW - M - 3, y + 4.8, { align: 'right' }); y += 13;
+
+    if (y > PH - 32) { doc.addPage(); chrome(2, 2); y = 22; }
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7.5); doc.setTextColor(...DK); doc.text('TERMS & CONDITIONS', M, y); y += 5;
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(6.5); doc.setTextColor(80, 80, 80);
+    ['1. Import Tool does not and will not buy rig time for any reason.',
+      '2. Subtotal does not include man days, subsistence or kilometerage.',
+      '3. Thread Cutting and Third Party Charges are charged at cost + 20%.',
+      '4. Prices are firm within 7 days from quotation date. E.X.W. Import Tool Locations.',
+      '5. Stock point sales are subject to a 10% surcharge.',
+      '6. Return Policy: 0-30 days = 35% restocking fee. Beyond 30 days — no returns. Special order items non-refundable.',
+      '7. * P/N with asterisk indicates BOM pending approval in Priority ERP (Items 3 & 5).']
+      .forEach(t => { const ls = doc.splitTextToSize(t, CW); doc.text(ls, M, y); y += ls.length * 3.8 + 1; });
+
+    doc.output('bloburl');
+    const blob = doc.output('blob'); const url = URL.createObjectURL(blob); window.open(url, '_blank');
+  }
+
+  // ── INIT & ROUTING ──
+  window.addEventListener('popstate', (e) => {
+    if (e.state && e.state.id) go(e.state.id, true);
+    else go((window.location.hash || '#dash').substring(1), true);
+  });
+
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.bta,.cta,.eta').forEach(t => { t.style.height = 'auto'; t.style.height = t.scrollHeight + 'px'; });
+    history.replaceState(null, null, ' '); // Clear hash entirely on load
+    go('dash', true); // Always start on Home Page
+  });
+</script>
